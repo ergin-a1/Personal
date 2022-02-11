@@ -1,0 +1,1423 @@
+{
+  "name": "klaviyo-input-connector-master-recipe V 1.0",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 45,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "0caf22ca",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> every 1 days at <span class=\"provider\">09:08:00 AM</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "time_unit": "Days"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "days",
+      "trigger_every": "1",
+      "trigger_at": "09:08:00",
+      "timezone": "Asia/Kolkata"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "string",
+        "name": "trigger_at",
+        "control_type": "time",
+        "label": "Trigger at",
+        "hint": "Set a time to schedule the job.",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      },
+      {
+        "type": "string",
+        "name": "timezone",
+        "control_type": "select",
+        "label": "Timezone",
+        "hint": "Select the timezone to use. Leave it blank to use <b>(GMT-08:00) Pacific Time (US & Canada)</b>",
+        "pick_list": [
+          [
+            "International Date Line West",
+            "Etc/GMT+12"
+          ],
+          [
+            "Midway Island",
+            "Pacific/Midway"
+          ],
+          [
+            "American Samoa",
+            "Pacific/Pago_Pago"
+          ],
+          [
+            "Hawaii",
+            "Pacific/Honolulu"
+          ],
+          [
+            "Alaska",
+            "America/Juneau"
+          ],
+          [
+            "Pacific Time (US & Canada)",
+            "America/Los_Angeles"
+          ],
+          [
+            "Tijuana",
+            "America/Tijuana"
+          ],
+          [
+            "Mountain Time (US & Canada)",
+            "America/Denver"
+          ],
+          [
+            "Arizona",
+            "America/Phoenix"
+          ],
+          [
+            "Chihuahua",
+            "America/Chihuahua"
+          ],
+          [
+            "Mazatlan",
+            "America/Mazatlan"
+          ],
+          [
+            "Central Time (US & Canada)",
+            "America/Chicago"
+          ],
+          [
+            "Saskatchewan",
+            "America/Regina"
+          ],
+          [
+            "Guadalajara",
+            "America/Mexico_City"
+          ],
+          [
+            "Mexico City",
+            "America/Mexico_City"
+          ],
+          [
+            "Monterrey",
+            "America/Monterrey"
+          ],
+          [
+            "Central America",
+            "America/Guatemala"
+          ],
+          [
+            "Eastern Time (US & Canada)",
+            "America/New_York"
+          ],
+          [
+            "Indiana (East)",
+            "America/Indiana/Indianapolis"
+          ],
+          [
+            "Bogota",
+            "America/Bogota"
+          ],
+          [
+            "Lima",
+            "America/Lima"
+          ],
+          [
+            "Quito",
+            "America/Lima"
+          ],
+          [
+            "Atlantic Time (Canada)",
+            "America/Halifax"
+          ],
+          [
+            "Caracas",
+            "America/Caracas"
+          ],
+          [
+            "La Paz",
+            "America/La_Paz"
+          ],
+          [
+            "Santiago",
+            "America/Santiago"
+          ],
+          [
+            "Newfoundland",
+            "America/St_Johns"
+          ],
+          [
+            "Brasilia",
+            "America/Sao_Paulo"
+          ],
+          [
+            "Buenos Aires",
+            "America/Argentina/Buenos_Aires"
+          ],
+          [
+            "Montevideo",
+            "America/Montevideo"
+          ],
+          [
+            "Georgetown",
+            "America/Guyana"
+          ],
+          [
+            "Puerto Rico",
+            "America/Puerto_Rico"
+          ],
+          [
+            "Greenland",
+            "America/Godthab"
+          ],
+          [
+            "Mid-Atlantic",
+            "Atlantic/South_Georgia"
+          ],
+          [
+            "Azores",
+            "Atlantic/Azores"
+          ],
+          [
+            "Cape Verde Is.",
+            "Atlantic/Cape_Verde"
+          ],
+          [
+            "Dublin",
+            "Europe/Dublin"
+          ],
+          [
+            "Edinburgh",
+            "Europe/London"
+          ],
+          [
+            "Lisbon",
+            "Europe/Lisbon"
+          ],
+          [
+            "London",
+            "Europe/London"
+          ],
+          [
+            "Casablanca",
+            "Africa/Casablanca"
+          ],
+          [
+            "Monrovia",
+            "Africa/Monrovia"
+          ],
+          [
+            "UTC",
+            "Etc/UTC"
+          ],
+          [
+            "Belgrade",
+            "Europe/Belgrade"
+          ],
+          [
+            "Bratislava",
+            "Europe/Bratislava"
+          ],
+          [
+            "Budapest",
+            "Europe/Budapest"
+          ],
+          [
+            "Ljubljana",
+            "Europe/Ljubljana"
+          ],
+          [
+            "Prague",
+            "Europe/Prague"
+          ],
+          [
+            "Sarajevo",
+            "Europe/Sarajevo"
+          ],
+          [
+            "Skopje",
+            "Europe/Skopje"
+          ],
+          [
+            "Warsaw",
+            "Europe/Warsaw"
+          ],
+          [
+            "Zagreb",
+            "Europe/Zagreb"
+          ],
+          [
+            "Brussels",
+            "Europe/Brussels"
+          ],
+          [
+            "Copenhagen",
+            "Europe/Copenhagen"
+          ],
+          [
+            "Madrid",
+            "Europe/Madrid"
+          ],
+          [
+            "Paris",
+            "Europe/Paris"
+          ],
+          [
+            "Amsterdam",
+            "Europe/Amsterdam"
+          ],
+          [
+            "Berlin",
+            "Europe/Berlin"
+          ],
+          [
+            "Bern",
+            "Europe/Zurich"
+          ],
+          [
+            "Zurich",
+            "Europe/Zurich"
+          ],
+          [
+            "Rome",
+            "Europe/Rome"
+          ],
+          [
+            "Stockholm",
+            "Europe/Stockholm"
+          ],
+          [
+            "Vienna",
+            "Europe/Vienna"
+          ],
+          [
+            "West Central Africa",
+            "Africa/Algiers"
+          ],
+          [
+            "Bucharest",
+            "Europe/Bucharest"
+          ],
+          [
+            "Cairo",
+            "Africa/Cairo"
+          ],
+          [
+            "Helsinki",
+            "Europe/Helsinki"
+          ],
+          [
+            "Kyiv",
+            "Europe/Kiev"
+          ],
+          [
+            "Riga",
+            "Europe/Riga"
+          ],
+          [
+            "Sofia",
+            "Europe/Sofia"
+          ],
+          [
+            "Tallinn",
+            "Europe/Tallinn"
+          ],
+          [
+            "Vilnius",
+            "Europe/Vilnius"
+          ],
+          [
+            "Athens",
+            "Europe/Athens"
+          ],
+          [
+            "Istanbul",
+            "Europe/Istanbul"
+          ],
+          [
+            "Minsk",
+            "Europe/Minsk"
+          ],
+          [
+            "Jerusalem",
+            "Asia/Jerusalem"
+          ],
+          [
+            "Harare",
+            "Africa/Harare"
+          ],
+          [
+            "Pretoria",
+            "Africa/Johannesburg"
+          ],
+          [
+            "Kaliningrad",
+            "Europe/Kaliningrad"
+          ],
+          [
+            "Moscow",
+            "Europe/Moscow"
+          ],
+          [
+            "St. Petersburg",
+            "Europe/Moscow"
+          ],
+          [
+            "Volgograd",
+            "Europe/Volgograd"
+          ],
+          [
+            "Samara",
+            "Europe/Samara"
+          ],
+          [
+            "Kuwait",
+            "Asia/Kuwait"
+          ],
+          [
+            "Riyadh",
+            "Asia/Riyadh"
+          ],
+          [
+            "Nairobi",
+            "Africa/Nairobi"
+          ],
+          [
+            "Baghdad",
+            "Asia/Baghdad"
+          ],
+          [
+            "Tehran",
+            "Asia/Tehran"
+          ],
+          [
+            "Abu Dhabi",
+            "Asia/Muscat"
+          ],
+          [
+            "Muscat",
+            "Asia/Muscat"
+          ],
+          [
+            "Baku",
+            "Asia/Baku"
+          ],
+          [
+            "Tbilisi",
+            "Asia/Tbilisi"
+          ],
+          [
+            "Yerevan",
+            "Asia/Yerevan"
+          ],
+          [
+            "Kabul",
+            "Asia/Kabul"
+          ],
+          [
+            "Ekaterinburg",
+            "Asia/Yekaterinburg"
+          ],
+          [
+            "Islamabad",
+            "Asia/Karachi"
+          ],
+          [
+            "Karachi",
+            "Asia/Karachi"
+          ],
+          [
+            "Tashkent",
+            "Asia/Tashkent"
+          ],
+          [
+            "Chennai",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kolkata",
+            "Asia/Kolkata"
+          ],
+          [
+            "Mumbai",
+            "Asia/Kolkata"
+          ],
+          [
+            "New Delhi",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kathmandu",
+            "Asia/Kathmandu"
+          ],
+          [
+            "Astana",
+            "Asia/Dhaka"
+          ],
+          [
+            "Dhaka",
+            "Asia/Dhaka"
+          ],
+          [
+            "Sri Jayawardenepura",
+            "Asia/Colombo"
+          ],
+          [
+            "Almaty",
+            "Asia/Almaty"
+          ],
+          [
+            "Novosibirsk",
+            "Asia/Novosibirsk"
+          ],
+          [
+            "Rangoon",
+            "Asia/Rangoon"
+          ],
+          [
+            "Bangkok",
+            "Asia/Bangkok"
+          ],
+          [
+            "Hanoi",
+            "Asia/Bangkok"
+          ],
+          [
+            "Jakarta",
+            "Asia/Jakarta"
+          ],
+          [
+            "Krasnoyarsk",
+            "Asia/Krasnoyarsk"
+          ],
+          [
+            "Beijing",
+            "Asia/Shanghai"
+          ],
+          [
+            "Chongqing",
+            "Asia/Chongqing"
+          ],
+          [
+            "Hong Kong",
+            "Asia/Hong_Kong"
+          ],
+          [
+            "Urumqi",
+            "Asia/Urumqi"
+          ],
+          [
+            "Kuala Lumpur",
+            "Asia/Kuala_Lumpur"
+          ],
+          [
+            "Singapore",
+            "Asia/Singapore"
+          ],
+          [
+            "Taipei",
+            "Asia/Taipei"
+          ],
+          [
+            "Perth",
+            "Australia/Perth"
+          ],
+          [
+            "Irkutsk",
+            "Asia/Irkutsk"
+          ],
+          [
+            "Ulaanbaatar",
+            "Asia/Ulaanbaatar"
+          ],
+          [
+            "Seoul",
+            "Asia/Seoul"
+          ],
+          [
+            "Osaka",
+            "Asia/Tokyo"
+          ],
+          [
+            "Sapporo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Tokyo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Yakutsk",
+            "Asia/Yakutsk"
+          ],
+          [
+            "Darwin",
+            "Australia/Darwin"
+          ],
+          [
+            "Adelaide",
+            "Australia/Adelaide"
+          ],
+          [
+            "Canberra",
+            "Australia/Melbourne"
+          ],
+          [
+            "Melbourne",
+            "Australia/Melbourne"
+          ],
+          [
+            "Sydney",
+            "Australia/Sydney"
+          ],
+          [
+            "Brisbane",
+            "Australia/Brisbane"
+          ],
+          [
+            "Hobart",
+            "Australia/Hobart"
+          ],
+          [
+            "Vladivostok",
+            "Asia/Vladivostok"
+          ],
+          [
+            "Guam",
+            "Pacific/Guam"
+          ],
+          [
+            "Port Moresby",
+            "Pacific/Port_Moresby"
+          ],
+          [
+            "Magadan",
+            "Asia/Magadan"
+          ],
+          [
+            "Srednekolymsk",
+            "Asia/Srednekolymsk"
+          ],
+          [
+            "Solomon Is.",
+            "Pacific/Guadalcanal"
+          ],
+          [
+            "New Caledonia",
+            "Pacific/Noumea"
+          ],
+          [
+            "Fiji",
+            "Pacific/Fiji"
+          ],
+          [
+            "Kamchatka",
+            "Asia/Kamchatka"
+          ],
+          [
+            "Marshall Is.",
+            "Pacific/Majuro"
+          ],
+          [
+            "Auckland",
+            "Pacific/Auckland"
+          ],
+          [
+            "Wellington",
+            "Pacific/Auckland"
+          ],
+          [
+            "Nuku'alofa",
+            "Pacific/Tongatapu"
+          ],
+          [
+            "Tokelau Is.",
+            "Pacific/Fakaofo"
+          ],
+          [
+            "Chatham Is.",
+            "Pacific/Chatham"
+          ],
+          [
+            "Samoa",
+            "Pacific/Apia"
+          ]
+        ],
+        "optional": true
+      }
+    ],
+    "visible_config_fields": [
+      "time_unit",
+      "trigger_every",
+      "trigger_at",
+      "timezone"
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe",
+        "as": "f1470f04",
+        "title": null,
+        "description": "Call <span class=\"provider\">dummy-job-registration-function</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "dummy-job-registration-function"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/dummy_job_registration_function.recipe.json",
+            "name": "dummy-job-registration-function",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "jobId": "job-1"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Job ID",
+                "name": "jobId",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch last execution",
+                "parse_output": "float_conversion",
+                "name": "epoch_last_execution",
+                "type": "number",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Job ID",
+                "name": "jobId",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "719bbadf-891f-476b-8ed7-ffa793f56ad8"
+      },
+      {
+        "number": 2,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "da9c94b7",
+        "title": "  Create variables segmentId, epochJobStart, epochJobEnd, fileSuffix",
+        "description": "Create variables <span class=\"provider\">segmentId</span>, <span class=\"provider\">epochJobStart</span>, <span class=\"provider\">epochJobEnd</span>, <span class=\"provider\">fileSuffix</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"segment_id\",\"type\":\"string\",\"optional\":true,\"label\":\"segmentId\",\"control_type\":\"text\"},{\"name\":\"epoch_job_start\",\"type\":\"number\",\"optional\":true,\"label\":\"epochJobStart\",\"control_type\":\"number\"},{\"name\":\"epoch_job_end\",\"type\":\"number\",\"optional\":true,\"label\":\"epochJobEnd\",\"control_type\":\"number\"},{\"name\":\"file_suffix\",\"type\":\"string\",\"optional\":true,\"label\":\"fileSuffix\",\"control_type\":\"text\"}]",
+            "data": {
+              "file_suffix": "=now.strftime(\"%Y%m%d%H%M%S%L\")"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "segment_id",
+            "control_type": "text",
+            "label": "segmentId",
+            "optional": true
+          },
+          {
+            "type": "number",
+            "name": "epoch_job_start",
+            "control_type": "number",
+            "label": "epochJobStart",
+            "optional": true,
+            "parse_output": "float_conversion"
+          },
+          {
+            "type": "number",
+            "name": "epoch_job_end",
+            "control_type": "number",
+            "label": "epochJobEnd",
+            "optional": true,
+            "parse_output": "float_conversion"
+          },
+          {
+            "type": "string",
+            "name": "file_suffix",
+            "control_type": "text",
+            "label": "fileSuffix",
+            "optional": true
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "variables",
+            "control_type": "form-schema-builder",
+            "label": "Variables",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "segmentId",
+                    "name": "segment_id",
+                    "type": "string",
+                    "optional": true,
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "epochJobStart",
+                    "parse_output": "float_conversion",
+                    "name": "epoch_job_start",
+                    "type": "number",
+                    "optional": true,
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "epochJobEnd",
+                    "parse_output": "float_conversion",
+                    "name": "epoch_job_end",
+                    "type": "number",
+                    "optional": true,
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "fileSuffix",
+                    "name": "file_suffix",
+                    "type": "string",
+                    "optional": true,
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "exclude_fields": [
+              "hint"
+            ]
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.segment_id",
+          "variables",
+          "variables.schema",
+          "variables.data.epoch_job_start",
+          "variables.data.epoch_job_end",
+          "variables.data.file_suffix"
+        ],
+        "uuid": "7cef1651-bbf6-4e17-a0dc-85ebe3dd9541"
+      },
+      {
+        "number": 3,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "equals_to",
+              "lhs": "#{_('data.workato_recipe_function.f1470f04.result.epoch_last_execution')}",
+              "rhs": "0",
+              "uuid": "condition-f2225a23-2d10-44e3-b047-1ba08da24bf1"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 4,
+            "provider": "workato_variable",
+            "name": "update_variable",
+            "as": "5c4604d7",
+            "title": null,
+            "description": "Update variable <span class=\"provider\">segmentId</span>",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "name": "segmentId (step 3)"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "name": "7cef1651-bbf6-4e17-a0dc-85ebe3dd9541:da9c94b7:segment_id",
+              "value": "#{_('data.workato.job_context.account_properties.segment_all_customers', 'account_property', 'segment_all_customers')}"
+            },
+            "extended_input_schema": [
+              {
+                "type": "string",
+                "name": "value",
+                "control_type": "text",
+                "label": "Value",
+                "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                "sticky": true,
+                "optional": true,
+                "strip_interpolation": true
+              }
+            ],
+            "uuid": "05447b48-275c-44b2-bd4f-d851e1eb2a00"
+          },
+          {
+            "number": 5,
+            "keyword": "else",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+            },
+            "block": [
+              {
+                "number": 6,
+                "provider": "workato_variable",
+                "name": "update_variable",
+                "as": "568c8b17",
+                "title": null,
+                "description": "Update variable <span class=\"provider\">segmentId</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "name": "segmentId (step 3)"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "name": "7cef1651-bbf6-4e17-a0dc-85ebe3dd9541:da9c94b7:segment_id",
+                  "value": "#{_('data.workato.job_context.account_properties.segment_last_24hours', 'account_property', 'segment_last_24hours')}"
+                },
+                "extended_input_schema": [
+                  {
+                    "type": "string",
+                    "name": "value",
+                    "control_type": "text",
+                    "label": "Value",
+                    "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+                    "sticky": true,
+                    "optional": true,
+                    "strip_interpolation": true
+                  }
+                ],
+                "uuid": "14864e96-94a5-4b6f-b2c8-c47bd2735e58"
+              }
+            ],
+            "uuid": "ea94826f-ae35-49c3-b7df-72f960adc36f"
+          }
+        ],
+        "uuid": "56a6503e-9464-4fc8-b244-ae2ceec96eef"
+      },
+      {
+        "number": 7,
+        "provider": "workato_variable",
+        "name": "update_variable",
+        "as": "3d2ea740",
+        "title": null,
+        "description": "Update variable <span class=\"provider\">epochJobStart</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "name": "epochJobStart (step 3)"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "name": "7cef1651-bbf6-4e17-a0dc-85ebe3dd9541:da9c94b7:epoch_job_start",
+          "value": "#{_('data.workato_recipe_function.f1470f04.result.epoch_last_execution')}"
+        },
+        "extended_input_schema": [
+          {
+            "type": "number",
+            "name": "value",
+            "control_type": "number",
+            "label": "Value",
+            "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+            "sticky": true,
+            "optional": true,
+            "parse_output": "float_conversion",
+            "strip_interpolation": true
+          }
+        ],
+        "uuid": "afdb6d20-e9fc-49c8-aac5-8c5eb7303e48"
+      },
+      {
+        "number": 8,
+        "provider": "workato_variable",
+        "name": "update_variable",
+        "as": "7c701497",
+        "title": null,
+        "description": "Update variable <span class=\"provider\">epochJobEnd</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "name": "epochJobEnd (step 3)"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "name": "7cef1651-bbf6-4e17-a0dc-85ebe3dd9541:da9c94b7:epoch_job_end",
+          "value": "=now.to_i"
+        },
+        "extended_input_schema": [
+          {
+            "type": "number",
+            "name": "value",
+            "control_type": "number",
+            "label": "Value",
+            "hint": "Provide a value for the variable. When the value is not supplied, the variable is not updated.<br>To clear the value, set the value to <b>nil</b> in formula mode.",
+            "sticky": true,
+            "optional": true,
+            "parse_output": "float_conversion",
+            "strip_interpolation": true
+          }
+        ],
+        "uuid": "08eb1243-c44f-49b1-8e44-3ae890223fac"
+      },
+      {
+        "number": 9,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe_async",
+        "as": "efd76fef",
+        "title": null,
+        "description": "Call <span class=\"provider\">recipe-function-klaviyo-get-contacts</span> (async)",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "recipe-function-klaviyo-get-contacts"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/recipe_function_klaviyo_get_contacts.recipe.json",
+            "name": "recipe-function-klaviyo-get-contacts",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "segmentId": "#{_('data.workato_variable.da9c94b7.segment_id')}",
+            "fileSuffix": "#{_('data.workato_variable.da9c94b7.file_suffix')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Segment ID",
+                "name": "segmentId",
+                "type": "string",
+                "optional": false,
+                "hint": ""
+              },
+              {
+                "control_type": "text",
+                "label": "File suffix",
+                "name": "fileSuffix",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "8f7bdd34-07d2-4135-a82c-7c683c350c06"
+      },
+      {
+        "number": 10,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe_async",
+        "as": "2df82e2c",
+        "title": null,
+        "description": "Call <span class=\"provider\">recipe-function-klaviyo-get-campaigns</span> (async)",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "recipe-function-klaviyo-get-campaigns"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/recipe_function_klaviyo_get_campaigns.recipe.json",
+            "name": "recipe-function-klaviyo-get-campaigns",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "epochJobStart": "#{_('data.workato_variable.da9c94b7.epoch_job_start')}",
+            "epochJobEnd": "#{_('data.workato_variable.da9c94b7.epoch_job_end')}",
+            "fileSuffix": "#{_('data.workato_variable.da9c94b7.file_suffix')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "number",
+                "label": "Epoch job start",
+                "parse_output": "float_conversion",
+                "name": "epochJobStart",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch job end",
+                "parse_output": "float_conversion",
+                "name": "epochJobEnd",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "File suffix",
+                "name": "fileSuffix",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "b997e395-aafc-4b9d-b7ec-bb7e2fc88836"
+      },
+      {
+        "number": 11,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe_async",
+        "as": "eed43c2a",
+        "title": null,
+        "description": "Call <span class=\"provider\">recipe-function-klaviyo-get-global-exclusion</span> (async)",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "recipe-function-klaviyo-get-global-exclusion"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/recipe_function_klaviyo_get_global_exclusion.recipe.json",
+            "name": "recipe-function-klaviyo-get-global-exclusion",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "epochJobEnd": "#{_('data.workato_variable.da9c94b7.epoch_job_end')}",
+            "epochJobStart": "#{_('data.workato_variable.da9c94b7.epoch_job_start')}",
+            "fileSuffix": "#{_('data.workato_variable.da9c94b7.file_suffix')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "number",
+                "label": "Epoch job start",
+                "parse_output": "float_conversion",
+                "name": "epochJobStart",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch job end",
+                "parse_output": "float_conversion",
+                "name": "epochJobEnd",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "File suffix",
+                "name": "fileSuffix",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "fa913782-b9a7-4bd4-93d3-6c30a95f53d7"
+      },
+      {
+        "number": 12,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe_async",
+        "as": "6e324933",
+        "title": null,
+        "description": "Call <span class=\"provider\">recipe-function-klaviyo-get-events</span> (async)",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "recipe-function-klaviyo-get-events"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/recipe_function_klaviyo_get_events.recipe.json",
+            "name": "recipe-function-klaviyo-get-events",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "epochJobStart": "#{_('data.workato_variable.da9c94b7.epoch_job_start')}",
+            "epochJobEnd": "#{_('data.workato_variable.da9c94b7.epoch_job_end')}",
+            "fileSuffix": "#{_('data.workato_variable.da9c94b7.file_suffix')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "number",
+                "label": "Epoch job start",
+                "parse_output": "float_conversion",
+                "name": "epochJobStart",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch job end",
+                "parse_output": "float_conversion",
+                "name": "epochJobEnd",
+                "type": "number",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "File suffix",
+                "name": "fileSuffix",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "f3490103-983f-40fa-b0f3-c9b96e6fd1cc"
+      },
+      {
+        "number": 13,
+        "provider": "workato_recipe_function",
+        "name": "wait_for_async_jobs",
+        "as": "cd5c025e",
+        "title": null,
+        "description": "Wait for async calls to complete",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "timeout": "120",
+          "async_calls": [
+            {
+              "job_ref": "#{_('data.workato_recipe_function.efd76fef.job_ref')}"
+            },
+            {
+              "job_ref": "#{_('data.workato_recipe_function.2df82e2c.job_ref')}"
+            },
+            {
+              "job_ref": "#{_('data.workato_recipe_function.eed43c2a.job_ref')}"
+            },
+            {
+              "job_ref": "#{_('data.workato_recipe_function.6e324933.job_ref')}"
+            }
+          ]
+        },
+        "uuid": "a30f71d2-538b-425e-b143-61ca50cdd65e",
+        "skip": false
+      },
+      {
+        "number": 14,
+        "provider": "workato_recipe_function",
+        "name": "call_recipe",
+        "as": "1a956790",
+        "title": null,
+        "description": "Call <span class=\"provider\">recipe-function-get-async-result</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "flow_id": "recipe-function-get-async-result"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "flow_id": {
+            "zip_name": "Master recipe/recipe_function_get_async_result.recipe.json",
+            "name": "recipe-function-get-async-result",
+            "folder": "Master recipe"
+          },
+          "parameters": {
+            "fileSuffix": "#{_('data.workato_variable.da9c94b7.file_suffix')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Result",
+                "name": "result",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Parameters",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "File suffix",
+                "name": "fileSuffix",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "81659046-a4b8-432a-9667-f6d63b58b960"
+      },
+      {
+        "number": 15,
+        "keyword": "if",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "type": "compound",
+          "operand": "and",
+          "conditions": [
+            {
+              "operand": "not_equals_to",
+              "lhs": "#{_('data.workato_recipe_function.1a956790.result.result')}",
+              "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+              "uuid": "condition-86858061-4c71-483d-9a4d-6c755acbdb1e"
+            }
+          ]
+        },
+        "block": [
+          {
+            "number": 16,
+            "keyword": "stop",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "stop_with_error": "true",
+              "stop_reason": "Data ingestion has been failed. Recipe ID:#{_('data.workato.job_context.recipe_id')} Recipe Name:#{_('data.workato.job_context.recipe_name')}"
+            },
+            "uuid": "8dba2a3e-3c14-43a9-9da7-07e48e249efc"
+          }
+        ],
+        "uuid": "9633c61e-c9c6-4fc2-8cb7-2f15ab864ba5"
+      },
+      {
+        "number": 17,
+        "keyword": "stop",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "stop_with_error": "false"
+        },
+        "uuid": "a24266cb-2264-4c89-9ff9-704585b47e7e"
+      }
+    ],
+    "uuid": "52312809-735a-4414-a3f3-7b104c5a565f"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
