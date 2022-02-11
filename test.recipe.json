@@ -1,0 +1,99 @@
+{
+  "name": "Test",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 2,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "c42196cc",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> on a <span class=\"provider\">specified schedule</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "5"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "new_connector_1_connector_568507_1642068543",
+        "name": "search_email",
+        "as": "c3c8c302",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "email_id": "qqq@test.com"
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "id",
+            "control_type": "text",
+            "label": "Id",
+            "optional": true,
+            "details": {
+              "real_name": "id"
+            }
+          }
+        ],
+        "uuid": "f8b7bca0-f6d5-4ca7-b8a8-3e94c1b0eeb9"
+      }
+    ],
+    "uuid": "e2d4b06f-9e97-4ea8-8b24-5f8f6c9721f3"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1642068543",
+      "account_id": {
+        "zip_name": "Recipes/my_sample_1_account.connection.json",
+        "name": "My sample-1 account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    }
+  ]
+}
