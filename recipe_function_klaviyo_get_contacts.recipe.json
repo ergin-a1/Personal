@@ -1,0 +1,1131 @@
+{
+  "name": "recipe-function-klaviyo-get-contacts",
+  "description": "When there is a function call, do action",
+  "version": 31,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "b871bcd3",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"segmentId\",\"type\":\"string\",\"optional\":false,\"hint\":\"\",\"control_type\":\"text\"},{\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Segment ID",
+            "name": "segmentId",
+            "type": "string",
+            "optional": false,
+            "hint": ""
+          },
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_variable",
+        "name": "declare_list",
+        "as": "82bb789e",
+        "title": " Create contacts list",
+        "description": "Create <span class=\"provider\">contacts</span> list",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "name": "contacts",
+          "list_item_schema_json": "[{\"control_type\":\"text\",\"label\":\"ID\",\"name\":\"Id\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Address 1\",\"name\":\"Address1\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Address 2\",\"name\":\"Address2\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"City\",\"name\":\"City\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Country\",\"name\":\"Country\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Zip\",\"name\":\"Zip\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Email\",\"name\":\"Email\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Title\",\"name\":\"Title\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Phone number\",\"name\":\"PhoneNumber\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Organization\",\"name\":\"Organization\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"First name\",\"name\":\"FirstName\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"text\",\"label\":\"Last name\",\"name\":\"LastName\",\"type\":\"string\",\"optional\":true},{\"control_type\":\"date_time\",\"label\":\"Date created\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"name\":\"DateCreated\",\"type\":\"date_time\",\"optional\":false},{\"control_type\":\"date_time\",\"label\":\"Date modified\",\"render_input\":\"date_time_conversion\",\"parse_output\":\"date_time_conversion\",\"name\":\"DateModified\",\"type\":\"date_time\",\"optional\":false},{\"name\":\"SourceAddressNumber\",\"type\":\"string\",\"optional\":true,\"control_type\":\"text\"}]"
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "list_items",
+            "label": "contacts",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "ID",
+                "name": "Id",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Address 1",
+                "name": "Address1",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Address 2",
+                "name": "Address2",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "City",
+                "name": "City",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Country",
+                "name": "Country",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Zip",
+                "name": "Zip",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Email",
+                "name": "Email",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Title",
+                "name": "Title",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Phone number",
+                "name": "PhoneNumber",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Organization",
+                "name": "Organization",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "First name",
+                "name": "FirstName",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "Last name",
+                "name": "LastName",
+                "type": "string",
+                "optional": true
+              },
+              {
+                "control_type": "date_time",
+                "label": "Date created",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "name": "DateCreated",
+                "type": "date_time",
+                "optional": false
+              },
+              {
+                "control_type": "date_time",
+                "label": "Date modified",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "name": "DateModified",
+                "type": "date_time",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Source address number",
+                "name": "SourceAddressNumber",
+                "type": "string",
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "uuid": "9c5e949e-30f1-47c2-98f7-b98107741f62"
+      },
+      {
+        "number": 2,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 3,
+            "provider": "new_connector_1_connector_568507_1640853883",
+            "name": "get_list_segment_members_with_marker",
+            "as": "e25c0b76",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "list_or_segment_id": "#{_('data.workato_recipe_function.b871bcd3.parameters.segmentId')}"
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "records",
+                "label": "Records",
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Id",
+                    "details": {
+                      "real_name": "id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email",
+                    "details": {
+                      "real_name": "email"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "email"
+                  }
+                ],
+                "details": {
+                  "real_name": "records"
+                }
+              }
+            ],
+            "uuid": "0c18b8fd-4740-4f3c-a6fc-9b7193565387"
+          },
+          {
+            "number": 4,
+            "as": "0d4dfbb3",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 5,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "e8cb9a91",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Contacts_#{_('data.workato_recipe_function.b871bcd3.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "3ea5a5cb-0397-4e0f-9416-e5ba580f8456"
+              },
+              {
+                "number": 6,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Failed to fetch contacts from Klaviyo for segment id #{_('data.workato_recipe_function.b871bcd3.parameters.segmentId')}"
+                },
+                "uuid": "45ef7513-b2d1-482e-81be-743025db6a41"
+              }
+            ],
+            "uuid": "ccea8a9e-f082-426e-a301-f40e159567cb"
+          }
+        ],
+        "uuid": "dbe47220-62a0-453c-9e19-117345279a80"
+      },
+      {
+        "number": 7,
+        "as": "37f54c05",
+        "keyword": "foreach",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "repeat_mode": "simple",
+        "clear_scope": "false",
+        "input": {
+        },
+        "block": [
+          {
+            "number": 8,
+            "keyword": "try",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+            },
+            "block": [
+              {
+                "number": 9,
+                "provider": "new_connector_1_connector_568507_1640853883",
+                "name": "get_profile",
+                "as": "cade61ef",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "person_id": "#{_('data.foreach.37f54c05.id')}"
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "string",
+                    "name": "object",
+                    "control_type": "text",
+                    "label": "Object",
+                    "optional": true,
+                    "details": {
+                      "real_name": "object"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "id",
+                    "control_type": "text",
+                    "label": "Id",
+                    "optional": true,
+                    "details": {
+                      "real_name": "id"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$address1",
+                    "control_type": "text",
+                    "label": "Address1",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$address1"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$address2",
+                    "control_type": "text",
+                    "label": "Address2",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$address2"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$city",
+                    "control_type": "text",
+                    "label": "City",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$city"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$country",
+                    "control_type": "text",
+                    "label": "Country",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$country"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$latitude",
+                    "control_type": "text",
+                    "label": "Latitude",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$latitude"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$longitude",
+                    "control_type": "text",
+                    "label": "Longitude",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$longitude"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$region",
+                    "control_type": "text",
+                    "label": "Region",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$region"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$zip",
+                    "control_type": "text",
+                    "label": "Zip",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$zip"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "first_name",
+                    "control_type": "text",
+                    "label": "First Name",
+                    "optional": true,
+                    "details": {
+                      "real_name": "first_name"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "email",
+                    "control_type": "text",
+                    "label": "Email",
+                    "optional": true,
+                    "details": {
+                      "real_name": "email"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$title",
+                    "control_type": "text",
+                    "label": "Title",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$title"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$organization",
+                    "control_type": "text",
+                    "label": "Organization",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$organization"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$phone_number",
+                    "control_type": "text",
+                    "label": "Phone Number",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$phone_number"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$last_name",
+                    "control_type": "text",
+                    "label": "Last Name",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$last_name"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "$timezone",
+                    "control_type": "text",
+                    "label": "Timezone",
+                    "optional": true,
+                    "details": {
+                      "real_name": "$timezone"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "created",
+                    "control_type": "text",
+                    "label": "Created",
+                    "optional": true,
+                    "details": {
+                      "real_name": "created"
+                    }
+                  },
+                  {
+                    "type": "string",
+                    "name": "updated",
+                    "control_type": "text",
+                    "label": "Updated",
+                    "optional": true,
+                    "details": {
+                      "real_name": "updated"
+                    }
+                  }
+                ],
+                "uuid": "6106d249-6403-4a7e-b517-763ff72fb01e"
+              },
+              {
+                "number": 10,
+                "provider": "workato_variable",
+                "name": "insert_to_list",
+                "as": "7125d805",
+                "title": "Add item to contacts list",
+                "description": "Add <span class=\"provider\">item</span> to <span class=\"provider\">contacts</span> list",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "name": "contacts (step 2)"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "location": "end",
+                  "name": "9c5e949e-30f1-47c2-98f7-b98107741f62:82bb789e",
+                  "list_item": {
+                    "DateCreated": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.created')}",
+                    "DateModified": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.updated')}",
+                    "Id": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.id')}",
+                    "Address1": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$address1')}",
+                    "Address2": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$address2')}",
+                    "City": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$city')}",
+                    "Country": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$country')}",
+                    "Zip": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$zip')}",
+                    "Email": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.email')}",
+                    "Title": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$title')}",
+                    "PhoneNumber": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$phone_number')}",
+                    "Organization": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$organization')}",
+                    "FirstName": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.first_name')}",
+                    "LastName": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$last_name')}",
+                    "SourceAddressNumber": "#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$address1')},#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$address2')},#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$city')},#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$country')},#{_('data.new_connector_1_connector_568507_1640853883.cade61ef.$zip')}"
+                  }
+                },
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "list_item",
+                    "label": "List item",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "name": "Id",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Address 1",
+                        "name": "Address1",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Address 2",
+                        "name": "Address2",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "City",
+                        "name": "City",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Country",
+                        "name": "Country",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Zip",
+                        "name": "Zip",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Email",
+                        "name": "Email",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Title",
+                        "name": "Title",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Phone number",
+                        "name": "PhoneNumber",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Organization",
+                        "name": "Organization",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "First name",
+                        "name": "FirstName",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Last name",
+                        "name": "LastName",
+                        "type": "string",
+                        "optional": true
+                      },
+                      {
+                        "control_type": "date_time",
+                        "label": "Date created",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "name": "DateCreated",
+                        "type": "date_time",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "date_time",
+                        "label": "Date modified",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "name": "DateModified",
+                        "type": "date_time",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Source address number",
+                        "name": "SourceAddressNumber",
+                        "type": "string",
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "visible_config_fields": [
+                  "name",
+                  "location",
+                  "list_item",
+                  "list_item.id",
+                  "list_item.email",
+                  "list_item.DateCreated",
+                  "list_item.DateModified",
+                  "list_item.address1",
+                  "list_item.address2",
+                  "list_item.city",
+                  "list_item.country",
+                  "list_item.zip",
+                  "list_item.title",
+                  "list_item.phone_number",
+                  "list_item.organization",
+                  "list_item.first_name",
+                  "list_item.last_name",
+                  "list_item.Address1",
+                  "list_item.Address2",
+                  "list_item.City",
+                  "list_item.Country",
+                  "list_item.Zip",
+                  "list_item.Title",
+                  "list_item.PhoneNumber",
+                  "list_item.Organization",
+                  "list_item.FirstName",
+                  "list_item.LastName",
+                  "list_item.SourceAddressNumber"
+                ],
+                "uuid": "86148129-ad14-4afe-9a76-75f2cd806e0b"
+              },
+              {
+                "number": 11,
+                "as": "21beff8b",
+                "keyword": "catch",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "max_retry_count": "3",
+                  "retry_interval": "5"
+                },
+                "block": [
+
+                ],
+                "uuid": "f7a1139c-e3b1-4198-9f13-2f2aa789862c"
+              }
+            ],
+            "uuid": "8a26d3d4-d548-472f-b9ee-aac1392b8baf"
+          }
+        ],
+        "source": "#{_('data.new_connector_1_connector_568507_1640853883.e25c0b76.records')}",
+        "uuid": "1ebf67e6-0ad7-4c62-b013-5f35c5e1c5e3"
+      },
+      {
+        "number": 12,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 13,
+            "provider": "csv_parser",
+            "name": "create_csv_lines",
+            "as": "f6dc5e26",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "create_header_line": true,
+              "force_quotes": true
+            },
+            "input": {
+              "create_header_line": "true",
+              "column_separator": "|",
+              "force_quotes": "true",
+              "column_labels": "SourceCustomerNumber|Address1|Address2|City|Country|Zip|Email|Title|PrimaryPhone|Company|FirstName|LastName|DateCreated|DateModified",
+              "lines": {
+                "____source": "#{_('data.workato_variable.82bb789e.list_items')}",
+                "column_0": "#{_('data.workato_variable.82bb789e.list_items.first.Id')}|#{_('data.workato_variable.82bb789e.list_items.first.Address1')}|#{_('data.workato_variable.82bb789e.list_items.first.Address2')}|#{_('data.workato_variable.82bb789e.list_items.first.City')}|#{_('data.workato_variable.82bb789e.list_items.first.Country')}|#{_('data.workato_variable.82bb789e.list_items.first.Zip')}|#{_('data.workato_variable.82bb789e.list_items.first.Email')}|#{_('data.workato_variable.82bb789e.list_items.first.Title')}|#{_('data.workato_variable.82bb789e.list_items.first.PhoneNumber')}|#{_('data.workato_variable.82bb789e.list_items.first.Organization')}|#{_('data.workato_variable.82bb789e.list_items.first.FirstName')}|#{_('data.workato_variable.82bb789e.list_items.first.LastName')}|#{_('data.workato_variable.82bb789e.list_items.first.DateCreated')}|#{_('data.workato_variable.82bb789e.list_items.first.DateModified')}"
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "array",
+                "name": "lines",
+                "label": "CSV data lines",
+                "hint": "Provide field mappings for the CSV data below.",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "SourceCustomerNumber|Address1|Address2|City|Country|Zip|Email|Title|PrimaryPhone|Company|FirstName|LastName|DateCreated|DateModified",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_0"
+                  }
+                ]
+              }
+            ],
+            "uuid": "b1bc0e21-2a45-4858-91a0-fae5668e19fa"
+          },
+          {
+            "number": 14,
+            "provider": "sftp_secondary",
+            "name": "upload",
+            "as": "dc0b4c6d",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "append": true
+            },
+            "input": {
+              "filename": "#{_('data.workato.job_context.account_properties.sftp_prefix', 'account_property', 'sftp_prefix')}Contacts_Klaviyo_#{_('data.workato_recipe_function.b871bcd3.parameters.fileSuffix')}.csv",
+              "append": "false",
+              "content": "#{_('data.csv_parser.f6dc5e26.csv_lines')}"
+            },
+            "uuid": "0ee38afc-3eb7-4436-9c8c-1448ac3d88d3"
+          },
+          {
+            "number": 15,
+            "as": "37368ec0",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 16,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "2384d634",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Contacts_#{_('data.workato_recipe_function.b871bcd3.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "0550854a-ace1-4571-b04f-504dc7c3d39c"
+              },
+              {
+                "number": 17,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Unable to create CSV file and place it to SFTP server."
+                },
+                "uuid": "9cccdfac-b720-4978-afb7-aa6b3dddf5fa"
+              }
+            ],
+            "uuid": "a8ccb9a4-cf35-4340-85c3-db08f1b2b3de"
+          }
+        ],
+        "uuid": "3c73cf0a-ca1d-4edf-bdd2-7c7232032a62"
+      },
+      {
+        "number": 18,
+        "provider": "lookup_table",
+        "name": "add_entry",
+        "as": "2853ef2e",
+        "title": null,
+        "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "lookup_table_id": "async-job-result"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "lookup_table_id": {
+            "zip_name": "async_job_result.lookup_table.json",
+            "name": "async-job-result",
+            "folder": ""
+          },
+          "parameters": {
+            "col1": "Contacts_#{_('data.workato_recipe_function.b871bcd3.parameters.fileSuffix')}",
+            "col2": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "integer",
+            "name": "id",
+            "control_type": "number",
+            "label": "Entry ID",
+            "parse_output": "integer_conversion"
+          },
+          {
+            "type": "object",
+            "name": "entry",
+            "label": "Entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Entry fields",
+            "hint": "Fill the fields for the new entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "uuid": "8a08fd75-23f1-4a62-aa19-8c5750112e84"
+      },
+      {
+        "number": 19,
+        "keyword": "stop",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "stop_with_error": "false"
+        },
+        "uuid": "8b772d67-dedb-441f-9a94-b0fd49a86ad3"
+      }
+    ],
+    "uuid": "47303ada-ff7d-46f4-9c07-d0354589e8f7"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
