@@ -1,0 +1,661 @@
+{
+  "name": "recipe-function-klaviyo-get-campaigns",
+  "description": "When there is a function call, do action",
+  "version": 16,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "dffcfa3d",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"epochJobStart\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"epochJobEnd\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "number",
+            "label": "Epoch job start",
+            "parse_output": "float_conversion",
+            "name": "epochJobStart",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "number",
+            "label": "Epoch job end",
+            "parse_output": "float_conversion",
+            "name": "epochJobEnd",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "new_connector_1_connector_568507_1640853883",
+            "name": "get_campaigns",
+            "as": "a7df9c34",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "from_timestamp": "#{_('data.workato_recipe_function.dffcfa3d.parameters.epochJobStart')}",
+              "to_timestamp": "#{_('data.workato_recipe_function.dffcfa3d.parameters.epochJobEnd')}"
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "data",
+                "label": "Data",
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Object",
+                    "details": {
+                      "real_name": "object"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "object"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Id",
+                    "details": {
+                      "real_name": "id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "details": {
+                      "real_name": "name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Subject",
+                    "details": {
+                      "real_name": "subject"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "subject"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "From Email",
+                    "details": {
+                      "real_name": "from_email"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "from_email"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "From Name",
+                    "details": {
+                      "real_name": "from_name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "from_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status",
+                    "details": {
+                      "real_name": "status"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "status"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status Id",
+                    "details": {
+                      "real_name": "status_id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "status_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Status Label",
+                    "details": {
+                      "real_name": "status_label"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "status_label"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Sent At",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "sent_at"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "sent_at"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Send Time",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "send_time"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "send_time"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Created",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "created"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "created"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Updated",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "updated"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "updated"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Number of recipients",
+                    "details": {
+                      "real_name": "num_recipients"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "num_recipients"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Campaign Type",
+                    "details": {
+                      "real_name": "campaign_type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "campaign_type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Is segmented",
+                    "details": {
+                      "real_name": "is_segmented"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "is_segmented"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Message Type",
+                    "details": {
+                      "real_name": "message_type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "message_type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Template Id",
+                    "details": {
+                      "real_name": "template_id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "template_id"
+                  }
+                ]
+              }
+            ],
+            "uuid": "73f66a7a-943d-4d69-9a39-9ae06b60349a"
+          },
+          {
+            "number": 3,
+            "provider": "csv_parser",
+            "name": "create_csv_lines",
+            "as": "1e781a4b",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "create_header_line": true,
+              "force_quotes": true
+            },
+            "input": {
+              "create_header_line": "true",
+              "column_separator": "|",
+              "force_quotes": "true",
+              "column_labels": "SourceCampaignNumber\nName\nSubject\nMessageFrom\nSendDate\nDateCreated\nDateModified\nType",
+              "lines": {
+                "____source": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data')}",
+                "column_0": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.id')}",
+                "column_1": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.name')}",
+                "column_2": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.subject')}",
+                "column_3": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.from_email')}",
+                "column_4": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.send_time')}",
+                "column_5": "=_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.created').strftime(\"%Y%m%d%H%M%S\")",
+                "column_6": "=_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.updated').strftime(\"%Y%m%d%H%M%S\")",
+                "column_7": "#{_('data.new_connector_1_connector_568507_1640853883.a7df9c34.data.first.message_type')}"
+              }
+            },
+            "extended_input_schema": [
+              {
+                "type": "array",
+                "name": "lines",
+                "label": "CSV data lines",
+                "hint": "Provide field mappings for the CSV data below.",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "SourceCampaignNumber",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_0"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_1"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Subject",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_2"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "MessageFrom",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_3"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "SendDate",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_4"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "DateCreated",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_5"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "DateModified",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_6"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Type",
+                    "optional": true,
+                    "sticky": true,
+                    "type": "string",
+                    "name": "column_7"
+                  }
+                ]
+              }
+            ],
+            "uuid": "70539874-d5f2-4758-8521-39c98e0b6292"
+          },
+          {
+            "number": 4,
+            "provider": "sftp_secondary",
+            "name": "upload",
+            "as": "a52ddc96",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "append": true
+            },
+            "input": {
+              "filename": "#{_('data.workato.job_context.account_properties.sftp_prefix', 'account_property', 'sftp_prefix')}campaign_#{_('data.workato_recipe_function.dffcfa3d.parameters.fileSuffix')}.csv",
+              "content": "#{_('data.csv_parser.1e781a4b.csv_lines')}",
+              "append": "false"
+            },
+            "uuid": "f821eae3-e588-4747-850e-3fe147542bb7"
+          },
+          {
+            "number": 5,
+            "as": "a1809d55",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 6,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "4ddddd8c",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Campaigns_#{_('data.workato_recipe_function.dffcfa3d.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "366c5d69-773b-4aac-9517-f00e63261ae3"
+              },
+              {
+                "number": 7,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Failed to fetch campaigns from Klaviyo. Job id = "
+                },
+                "uuid": "803bc79a-a3bc-4877-993a-2c35f4d5d1ae"
+              }
+            ],
+            "uuid": "6672b196-01e5-451c-acf6-86885c73b9d9"
+          }
+        ],
+        "uuid": "c1a9a92e-bf89-43d7-bf13-f25ff4dfa471"
+      },
+      {
+        "number": 8,
+        "provider": "lookup_table",
+        "name": "add_entry",
+        "as": "32c92296",
+        "title": null,
+        "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "lookup_table_id": "async-job-result"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "lookup_table_id": {
+            "zip_name": "async_job_result.lookup_table.json",
+            "name": "async-job-result",
+            "folder": ""
+          },
+          "parameters": {
+            "col1": "Campaigns_#{_('data.workato_recipe_function.dffcfa3d.parameters.fileSuffix')}",
+            "col2": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "integer",
+            "name": "id",
+            "control_type": "number",
+            "label": "Entry ID",
+            "parse_output": "integer_conversion"
+          },
+          {
+            "type": "object",
+            "name": "entry",
+            "label": "Entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Entry fields",
+            "hint": "Fill the fields for the new entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "uuid": "23c72820-86a2-46b9-a090-1de22fb2f8bd"
+      },
+      {
+        "number": 9,
+        "keyword": "stop",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "stop_with_error": "false"
+        },
+        "uuid": "3f76fb64-fd7a-455f-be13-2c9a97df21a5"
+      }
+    ],
+    "uuid": "7556def5-09e0-40dd-91fe-adc5c2ed344c"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
