@@ -1,0 +1,901 @@
+{
+  "name": "recipe-function-klaviyo-get-specific-event",
+  "description": "When there is a function call, do action",
+  "version": 16,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "f6117e61",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"epochJobStart\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"epochJobEnd\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"},{\"name\":\"eventId\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[{\"name\":\"result\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "number",
+            "label": "Epoch job start",
+            "parse_output": "float_conversion",
+            "name": "epochJobStart",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "number",
+            "label": "Epoch job end",
+            "parse_output": "float_conversion",
+            "name": "epochJobEnd",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "Event ID",
+            "name": "eventId",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "new_connector_1_connector_568507_1640853883",
+            "name": "get_events_specific_metric",
+            "as": "b9413a79",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "metric_id": "#{_('data.workato_recipe_function.f6117e61.parameters.eventId')}",
+              "from_timestamp": "#{_('data.workato_recipe_function.f6117e61.parameters.epochJobStart')}",
+              "to_timestamp": "#{_('data.workato_recipe_function.f6117e61.parameters.epochJobEnd')}"
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "metrics",
+                "label": "Metrics",
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Object",
+                    "details": {
+                      "real_name": "object"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "object"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "details": {
+                      "real_name": "id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Statistic Id",
+                    "details": {
+                      "real_name": "statistic_id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "statistic_id"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Timestamp",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "timestamp"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "timestamp"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Event name",
+                    "details": {
+                      "real_name": "event_name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "event_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Datetime",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "datetime"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "datetime"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "UUID",
+                    "details": {
+                      "real_name": "uuid"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "uuid"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Subject",
+                        "details": {
+                          "real_name": "Subject"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Subject"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Campaign Name",
+                        "details": {
+                          "real_name": "Campaign Name"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Campaign Name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Message",
+                        "details": {
+                          "real_name": "$message"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$message"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Email Domain",
+                        "details": {
+                          "real_name": "Email Domain"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Email Domain"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Message send cohort",
+                        "details": {
+                          "real_name": "$_cohort$message_send_cohort"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$_cohort$message_send_cohort"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Client type",
+                        "details": {
+                          "real_name": "Client Type"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Client Type"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Client OS Family",
+                        "details": {
+                          "real_name": "Client OS Family"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Client OS Family"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": " Client OS",
+                        "details": {
+                          "real_name": " Client OS"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": " Client OS"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Client Name",
+                        "details": {
+                          "real_name": "Client Name"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Client Name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Message Interaction",
+                        "details": {
+                          "real_name": "$message_interaction"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$message_interaction"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ESP",
+                        "details": {
+                          "real_name": "$ESP"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$ESP"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Machine Open",
+                        "details": {
+                          "real_name": "machine_open"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "machine_open"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Event Id",
+                        "details": {
+                          "real_name": "$event_id"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$event_id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Bounce Type",
+                        "details": {
+                          "real_name": "Bounce Type"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Bounce Type"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "URL",
+                        "details": {
+                          "real_name": "URL"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "URL"
+                      }
+                    ],
+                    "label": "Event properties",
+                    "details": {
+                      "real_name": "event_properties"
+                    },
+                    "optional": true,
+                    "type": "object",
+                    "name": "event_properties"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Object",
+                        "details": {
+                          "real_name": "object"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "Subject"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "details": {
+                          "real_name": "id"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Email",
+                        "details": {
+                          "real_name": "$email"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$email"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Address1",
+                        "details": {
+                          "real_name": "$address1"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$address1"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Address2",
+                        "details": {
+                          "real_name": "$address2"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$address2"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "City",
+                        "details": {
+                          "real_name": "$city"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$city"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Country",
+                        "details": {
+                          "real_name": "$country"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$country"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Latitude",
+                        "details": {
+                          "real_name": "$latitude"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$latitude"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Longitude",
+                        "details": {
+                          "real_name": "$longitude"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$longitude"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Region",
+                        "details": {
+                          "real_name": "$region"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$region"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Zip",
+                        "details": {
+                          "real_name": "$zip"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$zip"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Title",
+                        "details": {
+                          "real_name": "$title"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$title"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "First Name",
+                        "details": {
+                          "real_name": "$first_name"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$first_name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Last Name",
+                        "details": {
+                          "real_name": "$last_name"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$last_name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Organization",
+                        "details": {
+                          "real_name": "$organization"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$organization"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Phone Number",
+                        "details": {
+                          "real_name": "$phone_number"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$phone_number"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "timezone",
+                        "details": {
+                          "real_name": "$timezone"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "$timezone"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Created",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "details": {
+                          "real_name": "created"
+                        },
+                        "optional": true,
+                        "type": "date_time",
+                        "name": "created"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Updated",
+                        "render_input": "date_time_conversion",
+                        "parse_output": "date_time_conversion",
+                        "details": {
+                          "real_name": "updated"
+                        },
+                        "optional": true,
+                        "type": "date_time",
+                        "name": "updated"
+                      }
+                    ],
+                    "label": "Person",
+                    "details": {
+                      "real_name": "person"
+                    },
+                    "optional": true,
+                    "type": "object",
+                    "name": "person"
+                  }
+                ]
+              }
+            ],
+            "uuid": "5c212b45-3932-4474-9818-2444ea27f7e6"
+          },
+          {
+            "number": 3,
+            "as": "e8f29a1a",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 4,
+                "provider": "logger",
+                "name": "log_message",
+                "as": "bfc483eb",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "message": "Error encountered while fetching events for #{_('data.workato_recipe_function.f6117e61.parameters.eventId')}"
+                },
+                "uuid": "ea347dd3-bb5b-4bf5-a972-39509582e043"
+              },
+              {
+                "number": 5,
+                "provider": "workato_recipe_function",
+                "name": "return_result",
+                "as": "4d9cfba2",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "result": {
+                    "result": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "d40e7155-0766-456b-b634-541e03291a74"
+              }
+            ],
+            "uuid": "df3b7a05-8eca-4c41-87aa-9675bf681c9d"
+          }
+        ],
+        "uuid": "ce4ab560-49a2-476e-9b40-6fe63ee1f3b0"
+      },
+      {
+        "number": 6,
+        "provider": "csv_parser",
+        "name": "create_csv_lines",
+        "as": "05fa2323",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "create_header_line": true,
+          "force_quotes": true
+        },
+        "input": {
+          "create_header_line": "true",
+          "column_separator": "|",
+          "force_quotes": "true",
+          "column_labels": "EventTimeStamp|Type|SourceCustomerNumber|Email|SourceMessageNumber|Subtype|URL",
+          "lines": {
+            "____source": "#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics')}",
+            "column_0": "#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.timestamp')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.event_name')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.person.id')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.person.$email')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.event_properties.$message')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.event_properties.Bounce Type')}|#{_('data.new_connector_1_connector_568507_1640853883.b9413a79.metrics.first.event_properties.URL')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "array",
+            "name": "lines",
+            "label": "CSV data lines",
+            "hint": "Provide field mappings for the CSV data below.",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "EventTimeStamp|Type|SourceCustomerNumber|Email|SourceMessageNumber|Subtype|URL",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "column_0"
+              }
+            ]
+          }
+        ],
+        "uuid": "b7d1d80d-f3e4-4265-a7d6-7c9ae09a8ed9",
+        "skip": false
+      },
+      {
+        "number": 7,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 8,
+            "provider": "sftp_secondary",
+            "name": "upload",
+            "as": "107ca127",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "append": true
+            },
+            "input": {
+              "filename": "#{_('data.workato.job_context.account_properties.sftp_prefix', 'account_property', 'sftp_prefix')}Events_Klaviyo_#{_('data.workato_recipe_function.f6117e61.parameters.eventId')}_#{_('data.workato_recipe_function.f6117e61.parameters.fileSuffix')}.csv",
+              "append": "false",
+              "content": "#{_('data.csv_parser.05fa2323.csv_lines')}"
+            },
+            "uuid": "e5079154-8ea5-4456-8e0f-c5e663e74e23",
+            "skip": false
+          },
+          {
+            "number": 9,
+            "as": "da953886",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 10,
+                "provider": "logger",
+                "name": "log_message",
+                "as": "81391cf5",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "message": "Error encountered while fetching events for #{_('data.workato_recipe_function.f6117e61.parameters.eventId')}"
+                },
+                "uuid": "dbc7f37e-8778-465e-aa41-904b5a578f75"
+              },
+              {
+                "number": 11,
+                "provider": "workato_recipe_function",
+                "name": "return_result",
+                "as": "d87c9a88",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "result": {
+                    "result": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "b715c096-70ff-4e37-b799-0abc49a33437"
+              }
+            ],
+            "uuid": "8e1ce83c-d76a-40ac-aa44-da071342758e"
+          }
+        ],
+        "uuid": "11fe2468-e3ca-4271-8078-ea90683ed1be"
+      },
+      {
+        "number": 12,
+        "provider": "sftp_secondary",
+        "name": "upload",
+        "as": "43159a30",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "append": true
+        },
+        "input": {
+          "filename": "#{_('data.workato.job_context.account_properties.sftp_prefix', 'account_property', 'sftp_prefix')}Events_Klaviyo_#{_('data.workato_recipe_function.f6117e61.parameters.eventId')}_#{_('data.workato_recipe_function.f6117e61.parameters.fileSuffix')}.csv",
+          "append": "false",
+          "content": "#{_('data.csv_parser.05fa2323.csv_lines')}"
+        },
+        "uuid": "ea552d3e-3e84-4a82-b942-2b745ef2f291",
+        "skip": false
+      },
+      {
+        "number": 13,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "5dc502c6",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "result": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Result",
+                "name": "result",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Result",
+                "name": "result",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "01dc2eaf-b4ba-4f7a-9c10-a1a0d6880fd8"
+      }
+    ],
+    "uuid": "d5e0cf88-f51c-437d-8b85-a73d963f85fa"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
