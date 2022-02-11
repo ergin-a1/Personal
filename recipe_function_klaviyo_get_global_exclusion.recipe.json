@@ -1,0 +1,795 @@
+{
+  "name": "recipe-function-klaviyo-get-global-exclusion",
+  "description": "When there is a function call, do action",
+  "version": 9,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "318bfa7e",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"control_type\":\"number\",\"label\":\"Epoch job start\",\"parse_output\":\"float_conversion\",\"name\":\"epochJobStart\",\"type\":\"number\",\"optional\":false},{\"control_type\":\"number\",\"label\":\"Epoch job end\",\"parse_output\":\"float_conversion\",\"name\":\"epochJobEnd\",\"type\":\"number\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"File suffix\",\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false}]",
+      "result_schema_json": "[]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "number",
+            "label": "Epoch job start",
+            "parse_output": "float_conversion",
+            "name": "epochJobStart",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "number",
+            "label": "Epoch job end",
+            "parse_output": "float_conversion",
+            "name": "epochJobEnd",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "new_connector_1_connector_568507_1640853883",
+            "name": "get_unsubscribe_information",
+            "as": "afe85631",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "from_timestamp": "#{_('data.workato_recipe_function.318bfa7e.parameters.epochJobStart')}",
+              "to_timestamp": "#{_('data.workato_recipe_function.318bfa7e.parameters.epochJobEnd')}"
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "data",
+                "label": "Data",
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Object",
+                    "details": {
+                      "real_name": "object"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "object"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email",
+                    "details": {
+                      "real_name": "email"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "email"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Reason",
+                    "details": {
+                      "real_name": "reason"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "reason"
+                  },
+                  {
+                    "control_type": "number",
+                    "label": "Timestamp",
+                    "parse_output": "float_conversion",
+                    "details": {
+                      "real_name": "timestamp"
+                    },
+                    "optional": true,
+                    "type": "number",
+                    "name": "timestamp"
+                  }
+                ]
+              }
+            ],
+            "uuid": "2a3087af-cdd2-4e76-91f4-1033fe467a04"
+          },
+          {
+            "number": 3,
+            "as": "c405690e",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 4,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "82fcd345",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Exclusions_#{_('data.workato_recipe_function.318bfa7e.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "4d7cd0a5-5788-42f7-aac7-c480604810da"
+              },
+              {
+                "number": 5,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Failed to fetch global exclusion list."
+                },
+                "uuid": "d0bb77a2-6054-49cd-8d1e-7e9c6c6dabe9"
+              }
+            ],
+            "uuid": "f183f9e9-371f-4bed-aa01-a9d05dad8f5a"
+          }
+        ],
+        "uuid": "67538415-bdae-4f0f-b13e-1b60f2f79d58"
+      },
+      {
+        "number": 6,
+        "provider": "workato_variable",
+        "name": "declare_list",
+        "as": "9c4fb80b",
+        "title": " Create persons list",
+        "description": "Create <span class=\"provider\">persons</span> list",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "name": "persons",
+          "list_item_schema_json": "[{\"control_type\":\"text\",\"label\":\"Email\",\"name\":\"Email\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Email opt out date\",\"name\":\"emailOptOutDate\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Source customer number\",\"name\":\"SourceCustomerNumber\",\"type\":\"string\",\"optional\":false},{\"control_type\":\"text\",\"label\":\"Do not mail\",\"name\":\"DoNotMail\",\"type\":\"string\",\"optional\":false}]"
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "list_items",
+            "label": "persons",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Email",
+                "name": "Email",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Email opt out date",
+                "name": "emailOptOutDate",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Source customer number",
+                "name": "SourceCustomerNumber",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "text",
+                "label": "Do not mail",
+                "name": "DoNotMail",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "171c6d5f-ffc5-41a7-87a9-d467f14c9bf5"
+      },
+      {
+        "number": 7,
+        "as": "730ca286",
+        "keyword": "foreach",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "repeat_mode": "simple",
+        "clear_scope": "false",
+        "input": {
+        },
+        "block": [
+          {
+            "number": 8,
+            "keyword": "try",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+            },
+            "block": [
+              {
+                "number": 9,
+                "provider": "new_connector_1_connector_568507_1640853883",
+                "name": "search_email",
+                "as": "c115ebba",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "email_id": "#{_('data.foreach.730ca286.email')}"
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "string",
+                    "name": "id",
+                    "control_type": "text",
+                    "label": "Id",
+                    "optional": true,
+                    "details": {
+                      "real_name": "id"
+                    }
+                  }
+                ],
+                "uuid": "0d2da9e1-d678-407a-ae8f-fedd44a60565"
+              },
+              {
+                "number": 10,
+                "provider": "workato_variable",
+                "name": "insert_to_list",
+                "as": "d4e0fb48",
+                "title": "Add item to persons list",
+                "description": "Add <span class=\"provider\">item</span> to <span class=\"provider\">persons</span> list",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "name": "persons (step 3)"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "location": "end",
+                  "name": "171c6d5f-ffc5-41a7-87a9-d467f14c9bf5:9c4fb80b",
+                  "list_item": {
+                    "Email": "#{_('data.foreach.730ca286.email')}",
+                    "emailOptOutDate": "#{_('data.foreach.730ca286.timestamp')}",
+                    "SourceCustomerNumber": "#{_('data.new_connector_1_connector_568507_1640853883.c115ebba.id')}",
+                    "DoNotMail": "Y"
+                  }
+                },
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "list_item",
+                    "label": "List item",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Email",
+                        "name": "Email",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Email opt out date",
+                        "name": "emailOptOutDate",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Source customer number",
+                        "name": "SourceCustomerNumber",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Do not mail",
+                        "name": "DoNotMail",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "ca721526-bf9e-44f4-9471-b665b609a52b"
+              },
+              {
+                "number": 11,
+                "as": "cd07b36c",
+                "keyword": "catch",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "max_retry_count": "3",
+                  "retry_interval": "5"
+                },
+                "block": [
+                  {
+                    "number": 12,
+                    "provider": "logger",
+                    "name": "log_message",
+                    "as": "5902d173",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "message": "Could find #{_('data.foreach.730ca286.email')} in Klaviyo."
+                    },
+                    "uuid": "86f324a8-5b14-4953-a796-a72c4f91b1da"
+                  }
+                ],
+                "uuid": "cf668006-75fa-4360-b9e2-087aed1fab8d"
+              }
+            ],
+            "uuid": "a98b13ba-e43e-4cb8-af3a-ddabaede8a80"
+          }
+        ],
+        "source": "#{_('data.new_connector_1_connector_568507_1640853883.afe85631.data')}",
+        "uuid": "0bb51f35-fe26-4c82-9f0e-7048f58a8e63"
+      },
+      {
+        "number": 13,
+        "provider": "csv_parser",
+        "name": "create_csv_lines",
+        "as": "bb5bb1fa",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "create_header_line": true,
+          "force_quotes": true
+        },
+        "input": {
+          "create_header_line": "true",
+          "column_separator": "|",
+          "force_quotes": "false",
+          "column_labels": "Email|EmailOptOutDate|SourceCustomerNumber|DoNotMail",
+          "lines": {
+            "____source": "#{_('data.workato_variable.9c4fb80b.list_items')}",
+            "column_0": "#{_('data.workato_variable.9c4fb80b.list_items.first.Email')}|#{_('data.workato_variable.9c4fb80b.list_items.first.emailOptOutDate')}|#{_('data.workato_variable.9c4fb80b.list_items.first.SourceCustomerNumber')}|#{_('data.workato_variable.9c4fb80b.list_items.first.DoNotMail')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "array",
+            "name": "lines",
+            "label": "CSV data lines",
+            "hint": "Provide field mappings for the CSV data below.",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Email|EmailOptOutDate|SourceCustomerNumber|DoNotMail",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "column_0"
+              }
+            ]
+          }
+        ],
+        "uuid": "e90d9f0f-5939-40c5-ac10-d51c56dd652b"
+      },
+      {
+        "number": 14,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 15,
+            "provider": "sftp_secondary",
+            "name": "upload",
+            "as": "13e8a390",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+              "append": true
+            },
+            "input": {
+              "filename": "#{_('data.workato.job_context.account_properties.sftp_prefix', 'account_property', 'sftp_prefix')}Exclusions_Klaviyo_#{_('data.workato_recipe_function.318bfa7e.parameters.fileSuffix')}.csv",
+              "append": "false",
+              "content": "#{_('data.csv_parser.bb5bb1fa.csv_lines')}"
+            },
+            "uuid": "2ae08020-f4f4-4364-9853-46519d694af8"
+          },
+          {
+            "number": 16,
+            "as": "46523e8a",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "0",
+              "retry_interval": "2"
+            },
+            "block": [
+              {
+                "number": 17,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "316cbc8e",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Exclusions_#{_('data.workato_recipe_function.318bfa7e.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "ffeb0581-b221-4c14-94c0-0888f4dd5ec6"
+              },
+              {
+                "number": 18,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Failed to fetch global exclusion list."
+                },
+                "uuid": "257efbf5-19dd-4ea6-9a1c-d484fbe4292f"
+              }
+            ],
+            "uuid": "1b577599-9374-4273-9414-6bb8e8b26dfc"
+          }
+        ],
+        "uuid": "fc77a039-ce84-459b-8a89-6d4dd9af8e27"
+      },
+      {
+        "number": 19,
+        "provider": "lookup_table",
+        "name": "add_entry",
+        "as": "01b13dae",
+        "title": null,
+        "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "lookup_table_id": "async-job-result"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "lookup_table_id": {
+            "zip_name": "async_job_result.lookup_table.json",
+            "name": "async-job-result",
+            "folder": ""
+          },
+          "parameters": {
+            "col1": "Exclusions_#{_('data.workato_recipe_function.318bfa7e.parameters.fileSuffix')}",
+            "col2": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "integer",
+            "name": "id",
+            "control_type": "number",
+            "label": "Entry ID",
+            "parse_output": "integer_conversion"
+          },
+          {
+            "type": "object",
+            "name": "entry",
+            "label": "Entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Entry fields",
+            "hint": "Fill the fields for the new entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "uuid": "857d8171-f80e-4bde-92ac-21863da67fe9"
+      },
+      {
+        "number": 20,
+        "keyword": "stop",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "stop_with_error": "false"
+        },
+        "uuid": "31ac4b0d-5134-462a-b410-42ad26d8433f"
+      }
+    ],
+    "uuid": "0d967f78-c9c0-4b74-bbd3-d0ab568e2032"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
