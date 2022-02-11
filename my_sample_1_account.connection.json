@@ -1,0 +1,10 @@
+{
+  "name": "My sample-1 account",
+  "provider": {
+    "zip_name": "sample_1.custom_adapter.json",
+    "name": "sample-1",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}
