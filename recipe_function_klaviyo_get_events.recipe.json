@@ -1,0 +1,817 @@
+{
+  "name": "recipe-function-klaviyo-get-events",
+  "description": "When there is a function call, do action",
+  "version": 16,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "d0420802",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"epochJobStart\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"epochJobEnd\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"},{\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "number",
+            "label": "Epoch job start",
+            "parse_output": "float_conversion",
+            "name": "epochJobStart",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "number",
+            "label": "Epoch job end",
+            "parse_output": "float_conversion",
+            "name": "epochJobEnd",
+            "type": "number",
+            "optional": false
+          },
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_variable",
+        "name": "declare_variable",
+        "as": "fe4931fe",
+        "title": "  Create variable eventList",
+        "description": "Create variable <span class=\"provider\">eventList</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "variables": {
+            "schema": "[{\"name\":\"event_list\",\"type\":\"string\",\"optional\":true,\"label\":\"eventList\",\"control_type\":\"text\"}]",
+            "data": {
+              "event_list": "Bounced Email|Clicked Email|Clicked SMS|Dropped Email|Failed to Deliver SMS|Marked Email as Spam|Opened Email|Received Email|Received SMS|Sent SMS|Unsubscribed|Unsubscribed from SMS"
+            }
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "event_list",
+            "control_type": "text",
+            "label": "eventList",
+            "optional": true
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "variables",
+            "control_type": "form-schema-builder",
+            "label": "Variables",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Schema",
+                "extends_schema": true,
+                "broadcast_change_event": true,
+                "type": "string",
+                "name": "schema"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "eventList",
+                    "name": "event_list",
+                    "type": "string",
+                    "optional": true,
+                    "hint": "Defaults to nil if not supplied.",
+                    "sticky": true
+                  }
+                ],
+                "label": "Data",
+                "type": "object",
+                "name": "data"
+              }
+            ],
+            "exclude_fields": [
+              "hint"
+            ]
+          }
+        ],
+        "visible_config_fields": [
+          "variables.data.event_list"
+        ],
+        "uuid": "31186a6a-0972-4aec-89f2-42836bcbc0f8"
+      },
+      {
+        "number": 2,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 3,
+            "provider": "new_connector_1_connector_568507_1640853883",
+            "name": "get_metrics_info",
+            "as": "fdcd8c41",
+            "title": null,
+            "description": null,
+            "keyword": "action",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+            },
+            "extended_output_schema": [
+              {
+                "type": "string",
+                "name": "object",
+                "control_type": "text",
+                "label": "Object",
+                "optional": true,
+                "details": {
+                  "real_name": "object"
+                }
+              },
+              {
+                "type": "array",
+                "name": "data",
+                "label": "Data",
+                "optional": true,
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Object",
+                    "details": {
+                      "real_name": "object"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "object"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "details": {
+                      "real_name": "id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Name",
+                    "details": {
+                      "real_name": "name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "name"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Object",
+                        "details": {
+                          "real_name": "object"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "object"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "ID",
+                        "details": {
+                          "real_name": "id"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "id"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Name",
+                        "details": {
+                          "real_name": "name"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "name"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Category",
+                        "details": {
+                          "real_name": "category"
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "category"
+                      }
+                    ],
+                    "label": "Integration",
+                    "details": {
+                      "real_name": "integration"
+                    },
+                    "optional": true,
+                    "type": "object",
+                    "name": "integration"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Created",
+                    "details": {
+                      "real_name": "created"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "created"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Updated",
+                    "details": {
+                      "real_name": "updated"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "updated"
+                  }
+                ],
+                "details": {
+                  "real_name": "data"
+                }
+              },
+              {
+                "type": "number",
+                "name": "page",
+                "control_type": "number",
+                "label": "Page",
+                "optional": true,
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "page"
+                }
+              },
+              {
+                "type": "number",
+                "name": "start",
+                "control_type": "number",
+                "label": "Start",
+                "optional": true,
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "start"
+                }
+              },
+              {
+                "type": "number",
+                "name": "end",
+                "control_type": "number",
+                "label": "End",
+                "optional": true,
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "end"
+                }
+              },
+              {
+                "type": "number",
+                "name": "total",
+                "control_type": "number",
+                "label": "Total",
+                "optional": true,
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "total"
+                }
+              },
+              {
+                "type": "number",
+                "name": "page_size",
+                "control_type": "number",
+                "label": "Page size",
+                "optional": true,
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "page_size"
+                }
+              }
+            ],
+            "uuid": "a9a164a5-18ae-44c1-99e9-0b77b2367dd8"
+          },
+          {
+            "number": 4,
+            "as": "69f995e0",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 5,
+                "provider": "lookup_table",
+                "name": "add_entry",
+                "as": "e3a2c808",
+                "title": null,
+                "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "lookup_table_id": "async-job-result"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "lookup_table_id": {
+                    "zip_name": "async_job_result.lookup_table.json",
+                    "name": "async-job-result",
+                    "folder": ""
+                  },
+                  "parameters": {
+                    "col1": "Events_#{_('data.workato_recipe_function.d0420802.parameters.fileSuffix')}",
+                    "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "integer",
+                    "name": "id",
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion"
+                  },
+                  {
+                    "type": "object",
+                    "name": "entry",
+                    "label": "Entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Entry fields",
+                    "hint": "Fill the fields for the new entry",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true,
+                        "optional": true
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "83c030cb-82c0-4d9b-8dcb-8f18cd302e8e"
+              },
+              {
+                "number": 6,
+                "keyword": "stop",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "stop_with_error": "true",
+                  "stop_reason": "Could not get metrics information from Klaviyo."
+                },
+                "uuid": "e85b4dd0-f1ee-43f1-90d3-29be6355b76e"
+              }
+            ],
+            "uuid": "d4d30fb5-7edb-4b59-ad60-ba8f705cdf90"
+          }
+        ],
+        "uuid": "c1e297c1-818a-4d78-a433-abd281b1a046"
+      },
+      {
+        "number": 7,
+        "as": "c523b42e",
+        "keyword": "foreach",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "repeat_mode": "simple",
+        "clear_scope": "false",
+        "input": {
+        },
+        "block": [
+          {
+            "number": 8,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "and",
+              "conditions": [
+                {
+                  "operand": "contains",
+                  "lhs": "#{_('data.workato_variable.fe4931fe.event_list')}",
+                  "rhs": "#{_('data.foreach.c523b42e.name')}",
+                  "uuid": "condition-9feaca14-25f2-4f71-bafb-0da5dc47e46a"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 9,
+                "provider": "workato_recipe_function",
+                "name": "call_recipe",
+                "as": "0b9f1358",
+                "title": null,
+                "description": "Call <span class=\"provider\">recipe-function-klaviyo-get-specific-event</span>",
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                  "flow_id": "recipe-function-klaviyo-get-specific-event"
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "flow_id": {
+                    "zip_name": "Master recipe/recipe_function_klaviyo_get_specific_event.recipe.json",
+                    "name": "recipe-function-klaviyo-get-specific-event",
+                    "folder": "Master recipe"
+                  },
+                  "parameters": {
+                    "epochJobStart": "#{_('data.workato_recipe_function.d0420802.parameters.epochJobStart')}",
+                    "epochJobEnd": "#{_('data.workato_recipe_function.d0420802.parameters.epochJobEnd')}",
+                    "fileSuffix": "#{_('data.workato_recipe_function.d0420802.parameters.fileSuffix')}",
+                    "eventId": "#{_('data.foreach.c523b42e.id')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "parameters",
+                    "label": "Parameters",
+                    "properties": [
+                      {
+                        "control_type": "number",
+                        "label": "Epoch job start",
+                        "parse_output": "float_conversion",
+                        "name": "epochJobStart",
+                        "type": "number",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "number",
+                        "label": "Epoch job end",
+                        "parse_output": "float_conversion",
+                        "name": "epochJobEnd",
+                        "type": "number",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "File suffix",
+                        "name": "fileSuffix",
+                        "type": "string",
+                        "optional": false
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Event ID",
+                        "name": "eventId",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "102fd4bf-76a6-4024-a3df-1d09e458bfdf"
+              },
+              {
+                "number": 10,
+                "keyword": "if",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "type": "compound",
+                  "operand": "and",
+                  "conditions": [
+                    {
+                      "operand": "not_equals_to",
+                      "lhs": "#{_('data.workato_recipe_function.0b9f1358.result.result')}",
+                      "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+                      "uuid": "condition-8b998c78-add2-47ca-84f0-1498d8f45ee5"
+                    }
+                  ]
+                },
+                "block": [
+                  {
+                    "number": 11,
+                    "provider": "lookup_table",
+                    "name": "add_entry",
+                    "as": "ad0dcad0",
+                    "title": null,
+                    "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+                    "keyword": "action",
+                    "dynamicPickListSelection": {
+                      "lookup_table_id": "async-job-result"
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "lookup_table_id": {
+                        "zip_name": "async_job_result.lookup_table.json",
+                        "name": "async-job-result",
+                        "folder": ""
+                      },
+                      "parameters": {
+                        "col1": "Events_#{_('data.workato_recipe_function.d0420802.parameters.fileSuffix')}",
+                        "col2": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                      }
+                    },
+                    "extended_output_schema": [
+                      {
+                        "type": "integer",
+                        "name": "id",
+                        "control_type": "number",
+                        "label": "Entry ID",
+                        "parse_output": "integer_conversion"
+                      },
+                      {
+                        "type": "object",
+                        "name": "entry",
+                        "label": "Entry",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "job_ref",
+                            "name": "col1",
+                            "type": "string",
+                            "sticky": true
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "status",
+                            "name": "col2",
+                            "type": "string",
+                            "sticky": true
+                          }
+                        ]
+                      }
+                    ],
+                    "extended_input_schema": [
+                      {
+                        "type": "object",
+                        "name": "parameters",
+                        "label": "Entry fields",
+                        "hint": "Fill the fields for the new entry",
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "job_ref",
+                            "name": "col1",
+                            "type": "string",
+                            "sticky": true,
+                            "optional": true
+                          },
+                          {
+                            "control_type": "text",
+                            "label": "status",
+                            "name": "col2",
+                            "type": "string",
+                            "sticky": true,
+                            "optional": true
+                          }
+                        ]
+                      }
+                    ],
+                    "uuid": "6c2760c2-dc80-4b16-a321-c9c8d75c5395"
+                  },
+                  {
+                    "number": 12,
+                    "keyword": "stop",
+                    "dynamicPickListSelection": {
+                    },
+                    "toggleCfg": {
+                    },
+                    "input": {
+                      "stop_with_error": "true",
+                      "stop_reason": "Could not fetch events for #{_('data.foreach.c523b42e.id')}"
+                    },
+                    "uuid": "9ade97da-a51a-4e79-ae32-b8ee436a1810"
+                  }
+                ],
+                "uuid": "ae0540ff-c429-4019-a005-046ec965f337"
+              }
+            ],
+            "uuid": "154b6b97-8956-4075-9dd4-3273c16ed811"
+          }
+        ],
+        "source": "#{_('data.new_connector_1_connector_568507_1640853883.fdcd8c41.data')}",
+        "uuid": "d6ae82da-4bb0-493d-9fa9-f772383154a5"
+      },
+      {
+        "number": 13,
+        "provider": "lookup_table",
+        "name": "add_entry",
+        "as": "b0bfd8f0",
+        "title": null,
+        "description": "\n      Add\n      <span class=\"provider\">entry</span>\n      to\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "lookup_table_id": "async-job-result"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "lookup_table_id": {
+            "zip_name": "async_job_result.lookup_table.json",
+            "name": "async-job-result",
+            "folder": ""
+          },
+          "parameters": {
+            "col1": "Events_#{_('data.workato_recipe_function.d0420802.parameters.fileSuffix')}",
+            "col2": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "integer",
+            "name": "id",
+            "control_type": "number",
+            "label": "Entry ID",
+            "parse_output": "integer_conversion"
+          },
+          {
+            "type": "object",
+            "name": "entry",
+            "label": "Entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "parameters",
+            "label": "Entry fields",
+            "hint": "Fill the fields for the new entry",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "job_ref",
+                "name": "col1",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              },
+              {
+                "control_type": "text",
+                "label": "status",
+                "name": "col2",
+                "type": "string",
+                "sticky": true,
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "uuid": "f57545ec-4985-4418-a410-c56b930c67a8"
+      },
+      {
+        "number": 14,
+        "keyword": "stop",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "stop_with_error": "false"
+        },
+        "uuid": "718ea0bc-6fe2-4066-a72e-2123cf0ce33f"
+      }
+    ],
+    "uuid": "cd153296-059e-428e-9ea1-e4b0d279a4e5"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "workato_variable",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
