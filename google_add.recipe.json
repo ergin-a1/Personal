@@ -1,0 +1,2699 @@
+{
+  "name": "google-add",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 9,
+  "private": false,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "64984e9c",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> every 10 minutes",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "minutes",
+      "trigger_every": "10"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "google_ads_connector_568507_1641935682",
+        "name": "create_object",
+        "as": "19a92ef0",
+        "title": null,
+        "description": "Create <span class=\"provider\">User list</span> in <span class=\"provider\">Google Ads</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "object_name": "User list",
+          "membershipStatus": "Open",
+          "accountUserListStatus": "Enabled",
+          "crmBasedUserList.uploadKeyType": "Contact info",
+          "crmBasedUserList.dataSourceType": "First party"
+        },
+        "toggleCfg": {
+          "membershipStatus": true,
+          "accountUserListStatus": true,
+          "eligibleForSearch": true,
+          "crmBasedUserList.uploadKeyType": true,
+          "crmBasedUserList.dataSourceType": true
+        },
+        "input": {
+          "object_name": "user_list",
+          "client_customer_id": "8847219643",
+          "name": "TestUserList1",
+          "description": "TestUserList",
+          "membershipStatus": "OPEN",
+          "accountUserListStatus": "ENABLED",
+          "membershipLifeSpan": "540",
+          "eligibleForSearch": "true",
+          "crmBasedUserList": {
+            "uploadKeyType": "CONTACT_INFO",
+            "dataSourceType": "FIRST_PARTY"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "resourceName",
+            "control_type": "text",
+            "label": "Resource name",
+            "optional": true
+          },
+          {
+            "type": "object",
+            "name": "partialFailureError",
+            "label": "Partial failure error",
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Code",
+                "optional": true,
+                "type": "string",
+                "name": "code"
+              },
+              {
+                "control_type": "text",
+                "label": "Message",
+                "optional": true,
+                "type": "string",
+                "name": "message"
+              },
+              {
+                "name": "details",
+                "type": "array",
+                "of": "string",
+                "label": "Details",
+                "optional": true
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "string",
+            "name": "client_customer_id",
+            "control_type": "text",
+            "label": "Client customer ID",
+            "hint": "Customer ID of the target Google Ads account, typically in the form of \"1234567890\". <b>It must be the advertising account being managed by your manager account.</b>",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "name",
+            "control_type": "text",
+            "label": "Name",
+            "hint": "Name of this user list.",
+            "sticky": true,
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "membershipStatus",
+            "control_type": "select",
+            "label": "Membership status",
+            "hint": "Membership status of this user list. Indicates whether a user list is open or active.",
+            "sticky": true,
+            "pick_list": "user_list_membership_statuses",
+            "optional": true,
+            "toggle_hint": "Select from options",
+            "toggle_field": {
+              "name": "membershipStatus",
+              "label": "Membership status",
+              "type": "string",
+              "optional": true,
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "hint": "Allowed values are: OPEN and CLOSED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListMembershipStatus' target='_blank'>here</a> for more details about the options."
+            }
+          },
+          {
+            "type": "string",
+            "name": "closingReason",
+            "control_type": "select",
+            "label": "Closing reason",
+            "hint": "Indicating the reason why this user list membership status is closed. It is only populated on lists that were automatically closed due to inactivity, and will be cleared once the list membership status becomes open.",
+            "sticky": true,
+            "pick_list": "user_list_closing_reasons",
+            "optional": true,
+            "toggle_hint": "Select from options",
+            "toggle_field": {
+              "name": "closingReason",
+              "label": "Closing reason",
+              "type": "string",
+              "optional": true,
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "hint": "Allowed value: UNUSED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListClosingReason' target='_blank'>here</a> for more details about the options."
+            }
+          },
+          {
+            "type": "string",
+            "name": "accountUserListStatus",
+            "control_type": "select",
+            "label": "Account user list status",
+            "hint": "Indicates if this share is still enabled. When a UserList is shared with the user this field is set to ENABLED. Later the userList owner can decide to revoke the share and make it DISABLED. The default value of this field is set to ENABLED.",
+            "sticky": true,
+            "pick_list": "user_list_statuses",
+            "optional": true,
+            "toggle_hint": "Select from options",
+            "toggle_field": {
+              "name": "accountUserListStatus",
+              "label": "Account user list status",
+              "type": "string",
+              "optional": true,
+              "control_type": "text",
+              "toggle_hint": "Use custom value",
+              "hint": "Allowed values are: ENABLED and DISABLED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListAccessStatus' target='_blank'>here</a> for more details about the options."
+            }
+          },
+          {
+            "type": "string",
+            "name": "description",
+            "control_type": "text",
+            "label": "Description",
+            "sticky": true,
+            "optional": true
+          },
+          {
+            "type": "string",
+            "name": "integrationCode",
+            "control_type": "text",
+            "label": "Integration code",
+            "hint": "An ID from external system. It is used by user list sellers to correlate IDs on their systems.",
+            "sticky": true,
+            "optional": true
+          },
+          {
+            "type": "string",
+            "name": "membershipLifeSpan",
+            "control_type": "text",
+            "label": "Membership life span",
+            "hint": "Number of days a user's cookie stays on your list since its most recent addition to the list. This field must be between 0 and 540 inclusive. However, for CRM based userlists, this field can be set to 10000 which means no expiration.",
+            "sticky": true,
+            "optional": true
+          },
+          {
+            "type": "number",
+            "name": "eligibleForSearch",
+            "control_type": "checkbox",
+            "label": "Eligible for search",
+            "hint": "Indicates if this user list is eligible for Google googleAds.search Network.",
+            "sticky": true,
+            "optional": true,
+            "toggle_hint": "Select from options",
+            "toggle_field": {
+              "name": "eligibleForSearch",
+              "label": "Eligible for search",
+              "type": "string",
+              "render_input": "boolean_conversion",
+              "parse_output": "boolean_conversion",
+              "control_type": "text",
+              "optional": true,
+              "toggle_hint": "Use custom value",
+              "hint": "Allowed values are: true and false."
+            },
+            "render_input": "boolean_conversion",
+            "parse_output": "boolean_conversion"
+          },
+          {
+            "type": "object",
+            "name": "crmBasedUserList",
+            "label": "CRM based user list",
+            "hint": "User list of CRM users provided by the advertiser.",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "select",
+                "label": "Upload key type",
+                "sticky": true,
+                "pick_list": "user_list_upload_key_types",
+                "toggle_hint": "Select from options",
+                "hint": "Matching key type of the list. Mixed data types are not allowed on the same list.",
+                "toggle_field": {
+                  "name": "uploadKeyType",
+                  "label": "Upload key type",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: CONTACT_INFO, CRM_ID and MOBILE_ADVERTISING_ID.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#CustomerMatchUploadKeyType' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "uploadKeyType"
+              },
+              {
+                "control_type": "select",
+                "label": "Data source type",
+                "sticky": true,
+                "pick_list": "user_list_data_source_types",
+                "toggle_hint": "Select from options",
+                "hint": "Data source of the list. Default value is <b>First party</b>. Only customers on the allow-list can create third-party sourced CRM lists.",
+                "toggle_field": {
+                  "name": "dataSourceType",
+                  "label": "Data source type",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: FIRST_PARTY, THIRD_PARTY_CREDIT_BUREAU and THIRD_PARTY_VOTER_FILE.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListCrmDataSourceType' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "dataSourceType"
+              },
+              {
+                "control_type": "text",
+                "label": "App ID",
+                "sticky": true,
+                "hint": "A string that uniquely identifies a mobile application from which the data was collected to the Google Ads API. For iOS, the ID string is the 9 digit string that appears at the end of an App Store URL (e.g., \"476943146\" for \"Flood-It! 2\" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, the ID string is the application's package name (e.g., \"com.labpixies.colordrips\" for \"Color Drips\" given Google Play link: https://play.google.com/store/apps/details?id=com.labpixies.colordrips). Required when creating CrmBasedUserList for uploading mobile advertising IDs.",
+                "optional": true,
+                "type": "string",
+                "name": "appId"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "ruleBasedUserList",
+            "label": "Rule based user list",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "select",
+                "label": "Prepopulation status",
+                "sticky": true,
+                "pick_list": "user_list_prepopulation_statuses",
+                "toggle_hint": "Select from options",
+                "hint": "The status of pre-population. The field is default to NONE if not set which means the previous users will not be considered.",
+                "toggle_field": {
+                  "name": "prepopulationStatus",
+                  "label": "Prepopulation status",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: REQUESTED, FINISHED and FAILED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListPrepopulationStatus' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "prepopulationStatus"
+              },
+              {
+                "properties": [
+                  {
+                    "properties": [
+                      {
+                        "control_type": "select",
+                        "label": "Rule type",
+                        "sticky": true,
+                        "pick_list": "user_list_combined_rule_types",
+                        "toggle_hint": "Select from options",
+                        "hint": "Rule type is used to determine how to group rule items.",
+                        "toggle_field": {
+                          "name": "ruleType",
+                          "label": "Rule type",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "ruleType"
+                      },
+                      {
+                        "name": "ruleItemGroups",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Rule item groups",
+                        "sticky": true,
+                        "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                        "optional": true,
+                        "properties": [
+                          {
+                            "name": "ruleItems",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule items",
+                            "sticky": true,
+                            "hint": "Rule items that will be grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Name",
+                                "sticky": true,
+                                "optional": true,
+                                "type": "string",
+                                "name": "name"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_number_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Number comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "number",
+                                    "label": "Value",
+                                    "parse_output": "float_conversion",
+                                    "sticky": true,
+                                    "hint": "Number value to be compared with the variable.",
+                                    "optional": true,
+                                    "type": "number",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "Number rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a number operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "numberRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_string_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "String comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "sticky": true,
+                                    "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "String rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a string operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "stringRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_date_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Date comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Value",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "value"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Offset in days",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "offsetInDays"
+                                  }
+                                ],
+                                "label": "Date rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a date operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "dateRuleItem"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "label": "Left operand",
+                    "sticky": true,
+                    "hint": "Left operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "leftOperand"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "select",
+                        "label": "Rule type",
+                        "sticky": true,
+                        "pick_list": "user_list_combined_rule_types",
+                        "toggle_hint": "Select from options",
+                        "hint": "Rule type is used to determine how to group rule items.",
+                        "toggle_field": {
+                          "name": "ruleType",
+                          "label": "Rule type",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "ruleType"
+                      },
+                      {
+                        "name": "ruleItemGroups",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Rule item groups",
+                        "sticky": true,
+                        "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                        "optional": true,
+                        "properties": [
+                          {
+                            "name": "ruleItems",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule items",
+                            "sticky": true,
+                            "hint": "Rule items that will be grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Name",
+                                "sticky": true,
+                                "optional": true,
+                                "type": "string",
+                                "name": "name"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_number_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Number comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "number",
+                                    "label": "Value",
+                                    "parse_output": "float_conversion",
+                                    "sticky": true,
+                                    "hint": "Number value to be compared with the variable.",
+                                    "optional": true,
+                                    "type": "number",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "Number rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a number operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "numberRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_string_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "String comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "sticky": true,
+                                    "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "String rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a string operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "stringRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_date_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Date comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Value",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "value"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Offset in days",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "offsetInDays"
+                                  }
+                                ],
+                                "label": "Date rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a date operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "dateRuleItem"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "label": "Right operand",
+                    "sticky": true,
+                    "hint": "Right operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "rightOperand"
+                  },
+                  {
+                    "control_type": "select",
+                    "label": "Rule operator",
+                    "sticky": true,
+                    "pick_list": "user_list_combined_rule_operators",
+                    "toggle_hint": "Select from options",
+                    "hint": "Operator to connect the two operands.",
+                    "toggle_field": {
+                      "name": "ruleOperator",
+                      "label": "Rule operator",
+                      "type": "string",
+                      "optional": true,
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "hint": "Allowed values are: AND and AND_NOT.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListCombinedRuleOperator' target='_blank'>here</a> for more details about the options."
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "ruleOperator"
+                  }
+                ],
+                "label": "Combined rule user list",
+                "sticky": true,
+                "hint": "User lists defined by combining two rules.",
+                "optional": true,
+                "type": "object",
+                "name": "combinedRuleUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "properties": [
+                      {
+                        "control_type": "select",
+                        "label": "Rule type",
+                        "sticky": true,
+                        "pick_list": "user_list_combined_rule_types",
+                        "toggle_hint": "Select from options",
+                        "hint": "Rule type is used to determine how to group rule items.",
+                        "toggle_field": {
+                          "name": "ruleType",
+                          "label": "Rule type",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "ruleType"
+                      },
+                      {
+                        "name": "ruleItemGroups",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Rule item groups",
+                        "sticky": true,
+                        "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                        "optional": true,
+                        "properties": [
+                          {
+                            "name": "ruleItems",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule items",
+                            "sticky": true,
+                            "hint": "Rule items that will be grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Name",
+                                "sticky": true,
+                                "optional": true,
+                                "type": "string",
+                                "name": "name"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_number_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Number comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "number",
+                                    "label": "Value",
+                                    "parse_output": "float_conversion",
+                                    "sticky": true,
+                                    "hint": "Number value to be compared with the variable.",
+                                    "optional": true,
+                                    "type": "number",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "Number rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a number operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "numberRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_string_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "String comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "sticky": true,
+                                    "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "String rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a string operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "stringRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_date_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Date comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Value",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "value"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Offset in days",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "offsetInDays"
+                                  }
+                                ],
+                                "label": "Date rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a date operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "dateRuleItem"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "label": "Rule",
+                    "sticky": true,
+                    "hint": "Boolean rule that defines visitor of a page. Required for creating a date specific rule user list.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "rule"
+                  },
+                  {
+                    "control_type": "date",
+                    "label": "Start date",
+                    "render_input": "date_conversion",
+                    "parse_output": "date_conversion",
+                    "sticky": true,
+                    "hint": "Start date of users visit. If set to 2000-01-01, then the list includes all users before end date.<br>Required for creating a data specific rule user list.",
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "startDate"
+                  },
+                  {
+                    "control_type": "date",
+                    "label": "End date",
+                    "render_input": "date_conversion",
+                    "parse_output": "date_conversion",
+                    "sticky": true,
+                    "hint": "Last date of users visit. If set to 2037-12-30, then the list includes all users after start date.<br>Required for creating a data specific rule user list.",
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "endDate"
+                  }
+                ],
+                "label": "Date specific rule user list",
+                "sticky": true,
+                "hint": "Visitors of a page during specific dates. The visiting periods are defined as follows: Between start date (inclusive) and end date (inclusive); Before end date (exclusive) with start date = 2000-01-01; After start date (exclusive) with end date = 2037-12-30.",
+                "optional": true,
+                "type": "object",
+                "name": "dateSpecificRuleUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "properties": [
+                      {
+                        "control_type": "select",
+                        "label": "Rule type",
+                        "sticky": true,
+                        "pick_list": "user_list_combined_rule_types",
+                        "toggle_hint": "Select from options",
+                        "hint": "Rule type is used to determine how to group rule items.",
+                        "toggle_field": {
+                          "name": "ruleType",
+                          "label": "Rule type",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "ruleType"
+                      },
+                      {
+                        "name": "ruleItemGroups",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Rule item groups",
+                        "sticky": true,
+                        "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                        "optional": true,
+                        "properties": [
+                          {
+                            "name": "ruleItems",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule items",
+                            "sticky": true,
+                            "hint": "Rule items that will be grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "control_type": "text",
+                                "label": "Name",
+                                "sticky": true,
+                                "optional": true,
+                                "type": "string",
+                                "name": "name"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_number_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Number comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "number",
+                                    "label": "Value",
+                                    "parse_output": "float_conversion",
+                                    "sticky": true,
+                                    "hint": "Number value to be compared with the variable.",
+                                    "optional": true,
+                                    "type": "number",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "Number rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a number operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "numberRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_string_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "String comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "text",
+                                    "label": "Value",
+                                    "sticky": true,
+                                    "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "value"
+                                  }
+                                ],
+                                "label": "String rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a string operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "stringRuleItem"
+                              },
+                              {
+                                "properties": [
+                                  {
+                                    "control_type": "select",
+                                    "label": "Operator",
+                                    "sticky": true,
+                                    "pick_list": "user_list_date_rule_operators",
+                                    "toggle_hint": "Select from options",
+                                    "hint": "Date comparison operator.",
+                                    "toggle_field": {
+                                      "name": "operator",
+                                      "label": "Operator",
+                                      "type": "string",
+                                      "optional": true,
+                                      "control_type": "text",
+                                      "toggle_hint": "Use custom value",
+                                      "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                    },
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "operator"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Value",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "value"
+                                  },
+                                  {
+                                    "control_type": "date",
+                                    "label": "Offset in days",
+                                    "render_input": "date_conversion",
+                                    "parse_output": "date_conversion",
+                                    "sticky": true,
+                                    "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                    "optional": true,
+                                    "type": "date_time",
+                                    "name": "offsetInDays"
+                                  }
+                                ],
+                                "label": "Date rule item",
+                                "sticky": true,
+                                "hint": "An atomic rule item composed of a date operation.",
+                                "optional": true,
+                                "type": "object",
+                                "name": "dateRuleItem"
+                              }
+                            ]
+                          }
+                        ]
+                      }
+                    ],
+                    "label": "Rule",
+                    "sticky": true,
+                    "hint": "Boolean rule that defines this user list. The rule consists of a list of rule item groups and each rule item group consists of a list of rule items.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "rule"
+                  }
+                ],
+                "label": "Expression rule user list",
+                "sticky": true,
+                "hint": "Visitors of a page. The page visit is defined by one boolean rule expression.",
+                "optional": true,
+                "type": "object",
+                "name": "expressionRuleUserList"
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "logicalUserList",
+            "label": "Logical user list",
+            "hint": "User list that is a custom combination of user lists and user interests.",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "name": "rules",
+                "type": "array",
+                "of": "object",
+                "label": "Rules",
+                "sticky": true,
+                "hint": "Logical list rules that define this user list.",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "select",
+                    "label": "Operator",
+                    "sticky": true,
+                    "pick_list": "user_list_logical_rule_operators",
+                    "toggle_hint": "Select from options",
+                    "hint": "The logical operator of the rule.",
+                    "toggle_field": {
+                      "name": "operator",
+                      "label": "Operator",
+                      "type": "string",
+                      "optional": true,
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "hint": "Allowed values are: ALL, ANY and NONE.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListLogicalRuleOperator' target='_blank'>here</a> for more details about the options."
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "operator"
+                  },
+                  {
+                    "name": "ruleOperands",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Rule operands",
+                    "sticky": true,
+                    "hint": "The list of operands of the rule.",
+                    "optional": true,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "User list",
+                        "sticky": true,
+                        "hint": "Resource name of a user list as an operand.",
+                        "optional": true,
+                        "type": "string",
+                        "name": "userList"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "object",
+            "name": "basicUserList",
+            "label": "Basic user list",
+            "hint": "User list targeting as a collection of conversion or remarketing actions.",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "name": "actions",
+                "type": "array",
+                "of": "object",
+                "label": "Actions",
+                "sticky": true,
+                "hint": "Actions associated with this user list.",
+                "optional": true,
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Conversion action",
+                    "sticky": true,
+                    "hint": "A conversion action that's not generated from remarketing.",
+                    "optional": true,
+                    "type": "string",
+                    "name": "conversionAction"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Remarketing action",
+                    "sticky": true,
+                    "hint": "A remarketing action.",
+                    "optional": true,
+                    "type": "string",
+                    "name": "remarketingAction"
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "uuid": "2e832117-08ff-4281-94a6-4771ee271f87"
+      },
+      {
+        "number": 2,
+        "provider": "google_ads_connector_568507_1641935682",
+        "name": "search_objects",
+        "as": "4ec612c4",
+        "title": null,
+        "description": "Search for <span class=\"provider\">User lists</span> in <span class=\"provider\">Google Ads</span>",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+          "object_name": "User lists"
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "object_name": "user_list",
+          "page_size": "100",
+          "client_customer_id": "8847219643"
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "results",
+            "label": "User lists",
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "ID",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "id"
+              },
+              {
+                "control_type": "text",
+                "label": "Resource name",
+                "sticky": true,
+                "hint": "The resource name of the user list.<br>User list resource names have the form:\n            <b>customers/{customer_id}/userLists/{user_list_id}</b>",
+                "optional": true,
+                "type": "string",
+                "name": "resourceName"
+              },
+              {
+                "control_type": "select",
+                "label": "Membership status",
+                "sticky": true,
+                "pick_list": "user_list_membership_statuses",
+                "toggle_hint": "Select from options",
+                "hint": "Membership status of this user list. Indicates whether a user list is open or active.",
+                "toggle_field": {
+                  "name": "membershipStatus",
+                  "label": "Membership status",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: OPEN and CLOSED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListMembershipStatus' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "membershipStatus"
+              },
+              {
+                "control_type": "text",
+                "label": "Size range for display",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "sizeRangeForDisplay"
+              },
+              {
+                "control_type": "text",
+                "label": "Size range for search",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "sizeRangeForSearch"
+              },
+              {
+                "control_type": "text",
+                "label": "Type",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "type"
+              },
+              {
+                "control_type": "select",
+                "label": "Closing reason",
+                "sticky": true,
+                "pick_list": "user_list_closing_reasons",
+                "toggle_hint": "Select from options",
+                "hint": "Indicating the reason why this user list membership status is closed. It is only populated on lists that were automatically closed due to inactivity, and will be cleared once the list membership status becomes open.",
+                "toggle_field": {
+                  "name": "closingReason",
+                  "label": "Closing reason",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed value: UNUSED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListClosingReason' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "closingReason"
+              },
+              {
+                "control_type": "text",
+                "label": "Access reason",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "accessReason"
+              },
+              {
+                "control_type": "select",
+                "label": "Account user list status",
+                "sticky": true,
+                "pick_list": "user_list_statuses",
+                "toggle_hint": "Select from options",
+                "hint": "Indicates if this share is still enabled. When a UserList is shared with the user this field is set to ENABLED. Later the userList owner can decide to revoke the share and make it DISABLED. The default value of this field is set to ENABLED.",
+                "toggle_field": {
+                  "name": "accountUserListStatus",
+                  "label": "Account user list status",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: ENABLED and DISABLED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListAccessStatus' target='_blank'>here</a> for more details about the options."
+                },
+                "optional": true,
+                "type": "string",
+                "name": "accountUserListStatus"
+              },
+              {
+                "control_type": "number",
+                "label": "Read only",
+                "parse_output": "float_conversion",
+                "sticky": true,
+                "optional": true,
+                "type": "number",
+                "name": "readOnly"
+              },
+              {
+                "control_type": "text",
+                "label": "Name",
+                "sticky": true,
+                "hint": "Name of this user list.",
+                "optional": true,
+                "type": "string",
+                "name": "name"
+              },
+              {
+                "control_type": "text",
+                "label": "Description",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "description"
+              },
+              {
+                "control_type": "text",
+                "label": "Integration code",
+                "sticky": true,
+                "hint": "An ID from external system. It is used by user list sellers to correlate IDs on their systems.",
+                "optional": true,
+                "type": "string",
+                "name": "integrationCode"
+              },
+              {
+                "control_type": "text",
+                "label": "Membership life span",
+                "sticky": true,
+                "hint": "Number of days a user's cookie stays on your list since its most recent addition to the list. This field must be between 0 and 540 inclusive. However, for CRM based userlists, this field can be set to 10000 which means no expiration.",
+                "optional": true,
+                "type": "string",
+                "name": "membershipLifeSpan"
+              },
+              {
+                "control_type": "text",
+                "label": "Size for display",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "sizeForDisplay"
+              },
+              {
+                "control_type": "text",
+                "label": "Size for search",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "sizeForSearch"
+              },
+              {
+                "control_type": "checkbox",
+                "label": "Eligible for search",
+                "parse_output": "boolean_conversion",
+                "sticky": true,
+                "render_input": "boolean_conversion",
+                "toggle_hint": "Select from options",
+                "hint": "Indicates if this user list is eligible for Google googleAds.search Network.",
+                "toggle_field": {
+                  "name": "eligibleForSearch",
+                  "label": "Eligible for search",
+                  "type": "string",
+                  "render_input": "boolean_conversion",
+                  "parse_output": "boolean_conversion",
+                  "control_type": "text",
+                  "optional": true,
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: true and false."
+                },
+                "optional": true,
+                "type": "number",
+                "name": "eligibleForSearch"
+              },
+              {
+                "control_type": "text",
+                "label": "Eligible for display",
+                "sticky": true,
+                "optional": true,
+                "type": "string",
+                "name": "eligibleForDisplay"
+              },
+              {
+                "control_type": "integer",
+                "label": "Match rate percentage",
+                "parse_output": "integer_conversion",
+                "sticky": true,
+                "render_input": "integer_conversion",
+                "optional": true,
+                "type": "integer",
+                "name": "matchRatePercentage"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "select",
+                    "label": "Upload key type",
+                    "sticky": true,
+                    "pick_list": "user_list_upload_key_types",
+                    "toggle_hint": "Select from options",
+                    "hint": "Matching key type of the list. Mixed data types are not allowed on the same list.",
+                    "toggle_field": {
+                      "name": "uploadKeyType",
+                      "label": "Upload key type",
+                      "type": "string",
+                      "optional": true,
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "hint": "Allowed values are: CONTACT_INFO, CRM_ID and MOBILE_ADVERTISING_ID.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#CustomerMatchUploadKeyType' target='_blank'>here</a> for more details about the options."
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "uploadKeyType"
+                  },
+                  {
+                    "control_type": "select",
+                    "label": "Data source type",
+                    "sticky": true,
+                    "pick_list": "user_list_data_source_types",
+                    "toggle_hint": "Select from options",
+                    "hint": "Data source of the list. Default value is <b>First party</b>. Only customers on the allow-list can create third-party sourced CRM lists.",
+                    "toggle_field": {
+                      "name": "dataSourceType",
+                      "label": "Data source type",
+                      "type": "string",
+                      "optional": true,
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "hint": "Allowed values are: FIRST_PARTY, THIRD_PARTY_CREDIT_BUREAU and THIRD_PARTY_VOTER_FILE.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListCrmDataSourceType' target='_blank'>here</a> for more details about the options."
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "dataSourceType"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "App ID",
+                    "sticky": true,
+                    "hint": "A string that uniquely identifies a mobile application from which the data was collected to the Google Ads API. For iOS, the ID string is the 9 digit string that appears at the end of an App Store URL (e.g., \"476943146\" for \"Flood-It! 2\" whose App Store link is http://itunes.apple.com/us/app/flood-it!-2/id476943146). For Android, the ID string is the application's package name (e.g., \"com.labpixies.colordrips\" for \"Color Drips\" given Google Play link: https://play.google.com/store/apps/details?id=com.labpixies.colordrips). Required when creating CrmBasedUserList for uploading mobile advertising IDs.",
+                    "optional": true,
+                    "type": "string",
+                    "name": "appId"
+                  }
+                ],
+                "label": "CRM based user list",
+                "sticky": true,
+                "hint": "User list of CRM users provided by the advertiser.",
+                "optional": true,
+                "type": "object",
+                "name": "crmBasedUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Seed user list",
+                    "sticky": true,
+                    "optional": true,
+                    "type": "string",
+                    "name": "seedUserList"
+                  }
+                ],
+                "label": "Similar user list",
+                "sticky": true,
+                "optional": true,
+                "type": "object",
+                "name": "similarUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "select",
+                    "label": "Prepopulation status",
+                    "sticky": true,
+                    "pick_list": "user_list_prepopulation_statuses",
+                    "toggle_hint": "Select from options",
+                    "hint": "The status of pre-population. The field is default to NONE if not set which means the previous users will not be considered.",
+                    "toggle_field": {
+                      "name": "prepopulationStatus",
+                      "label": "Prepopulation status",
+                      "type": "string",
+                      "optional": true,
+                      "control_type": "text",
+                      "toggle_hint": "Use custom value",
+                      "hint": "Allowed values are: REQUESTED, FINISHED and FAILED.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListPrepopulationStatus' target='_blank'>here</a> for more details about the options."
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "prepopulationStatus"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "properties": [
+                          {
+                            "control_type": "select",
+                            "label": "Rule type",
+                            "sticky": true,
+                            "pick_list": "user_list_combined_rule_types",
+                            "toggle_hint": "Select from options",
+                            "hint": "Rule type is used to determine how to group rule items.",
+                            "toggle_field": {
+                              "name": "ruleType",
+                              "label": "Rule type",
+                              "type": "string",
+                              "optional": true,
+                              "control_type": "text",
+                              "toggle_hint": "Use custom value",
+                              "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                            },
+                            "optional": true,
+                            "type": "string",
+                            "name": "ruleType"
+                          },
+                          {
+                            "name": "ruleItemGroups",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule item groups",
+                            "sticky": true,
+                            "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "name": "ruleItems",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Rule items",
+                                "sticky": true,
+                                "hint": "Rule items that will be grouped together based on rule type.",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Name",
+                                    "sticky": true,
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "name"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_number_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Number comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "number",
+                                        "label": "Value",
+                                        "parse_output": "float_conversion",
+                                        "sticky": true,
+                                        "hint": "Number value to be compared with the variable.",
+                                        "optional": true,
+                                        "type": "number",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "Number rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a number operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "numberRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_string_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "String comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "text",
+                                        "label": "Value",
+                                        "sticky": true,
+                                        "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "String rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a string operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "stringRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_date_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Date comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Value",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "value"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Offset in days",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "offsetInDays"
+                                      }
+                                    ],
+                                    "label": "Date rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a date operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "dateRuleItem"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Left operand",
+                        "sticky": true,
+                        "hint": "Left operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.",
+                        "optional": true,
+                        "type": "object",
+                        "name": "leftOperand"
+                      },
+                      {
+                        "properties": [
+                          {
+                            "control_type": "select",
+                            "label": "Rule type",
+                            "sticky": true,
+                            "pick_list": "user_list_combined_rule_types",
+                            "toggle_hint": "Select from options",
+                            "hint": "Rule type is used to determine how to group rule items.",
+                            "toggle_field": {
+                              "name": "ruleType",
+                              "label": "Rule type",
+                              "type": "string",
+                              "optional": true,
+                              "control_type": "text",
+                              "toggle_hint": "Use custom value",
+                              "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                            },
+                            "optional": true,
+                            "type": "string",
+                            "name": "ruleType"
+                          },
+                          {
+                            "name": "ruleItemGroups",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule item groups",
+                            "sticky": true,
+                            "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "name": "ruleItems",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Rule items",
+                                "sticky": true,
+                                "hint": "Rule items that will be grouped together based on rule type.",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Name",
+                                    "sticky": true,
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "name"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_number_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Number comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "number",
+                                        "label": "Value",
+                                        "parse_output": "float_conversion",
+                                        "sticky": true,
+                                        "hint": "Number value to be compared with the variable.",
+                                        "optional": true,
+                                        "type": "number",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "Number rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a number operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "numberRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_string_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "String comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "text",
+                                        "label": "Value",
+                                        "sticky": true,
+                                        "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "String rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a string operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "stringRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_date_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Date comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Value",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "value"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Offset in days",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "offsetInDays"
+                                      }
+                                    ],
+                                    "label": "Date rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a date operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "dateRuleItem"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Right operand",
+                        "sticky": true,
+                        "hint": "Right operand of the combined rule. This field is required and must be populated when creating new combined rule based user list.",
+                        "optional": true,
+                        "type": "object",
+                        "name": "rightOperand"
+                      },
+                      {
+                        "control_type": "select",
+                        "label": "Rule operator",
+                        "sticky": true,
+                        "pick_list": "user_list_combined_rule_operators",
+                        "toggle_hint": "Select from options",
+                        "hint": "Operator to connect the two operands.",
+                        "toggle_field": {
+                          "name": "ruleOperator",
+                          "label": "Rule operator",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: AND and AND_NOT.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListCombinedRuleOperator' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "ruleOperator"
+                      }
+                    ],
+                    "label": "Combined rule user list",
+                    "sticky": true,
+                    "hint": "User lists defined by combining two rules.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "combinedRuleUserList"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "properties": [
+                          {
+                            "control_type": "select",
+                            "label": "Rule type",
+                            "sticky": true,
+                            "pick_list": "user_list_combined_rule_types",
+                            "toggle_hint": "Select from options",
+                            "hint": "Rule type is used to determine how to group rule items.",
+                            "toggle_field": {
+                              "name": "ruleType",
+                              "label": "Rule type",
+                              "type": "string",
+                              "optional": true,
+                              "control_type": "text",
+                              "toggle_hint": "Use custom value",
+                              "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                            },
+                            "optional": true,
+                            "type": "string",
+                            "name": "ruleType"
+                          },
+                          {
+                            "name": "ruleItemGroups",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule item groups",
+                            "sticky": true,
+                            "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "name": "ruleItems",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Rule items",
+                                "sticky": true,
+                                "hint": "Rule items that will be grouped together based on rule type.",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Name",
+                                    "sticky": true,
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "name"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_number_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Number comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "number",
+                                        "label": "Value",
+                                        "parse_output": "float_conversion",
+                                        "sticky": true,
+                                        "hint": "Number value to be compared with the variable.",
+                                        "optional": true,
+                                        "type": "number",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "Number rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a number operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "numberRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_string_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "String comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "text",
+                                        "label": "Value",
+                                        "sticky": true,
+                                        "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "String rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a string operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "stringRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_date_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Date comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Value",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "value"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Offset in days",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "offsetInDays"
+                                      }
+                                    ],
+                                    "label": "Date rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a date operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "dateRuleItem"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Rule",
+                        "sticky": true,
+                        "hint": "Boolean rule that defines visitor of a page. Required for creating a date specific rule user list.",
+                        "optional": true,
+                        "type": "object",
+                        "name": "rule"
+                      },
+                      {
+                        "control_type": "date",
+                        "label": "Start date",
+                        "render_input": "date_conversion",
+                        "parse_output": "date_conversion",
+                        "sticky": true,
+                        "hint": "Start date of users visit. If set to 2000-01-01, then the list includes all users before end date.<br>Required for creating a data specific rule user list.",
+                        "optional": true,
+                        "type": "date_time",
+                        "name": "startDate"
+                      },
+                      {
+                        "control_type": "date",
+                        "label": "End date",
+                        "render_input": "date_conversion",
+                        "parse_output": "date_conversion",
+                        "sticky": true,
+                        "hint": "Last date of users visit. If set to 2037-12-30, then the list includes all users after start date.<br>Required for creating a data specific rule user list.",
+                        "optional": true,
+                        "type": "date_time",
+                        "name": "endDate"
+                      }
+                    ],
+                    "label": "Date specific rule user list",
+                    "sticky": true,
+                    "hint": "Visitors of a page during specific dates. The visiting periods are defined as follows: Between start date (inclusive) and end date (inclusive); Before end date (exclusive) with start date = 2000-01-01; After start date (exclusive) with end date = 2037-12-30.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "dateSpecificRuleUserList"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "properties": [
+                          {
+                            "control_type": "select",
+                            "label": "Rule type",
+                            "sticky": true,
+                            "pick_list": "user_list_combined_rule_types",
+                            "toggle_hint": "Select from options",
+                            "hint": "Rule type is used to determine how to group rule items.",
+                            "toggle_field": {
+                              "name": "ruleType",
+                              "label": "Rule type",
+                              "type": "string",
+                              "optional": true,
+                              "control_type": "text",
+                              "toggle_hint": "Use custom value",
+                              "hint": "Allowed values are: AND_OF_ORS and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListRuleType' target='_blank'>here</a> for more details about the options."
+                            },
+                            "optional": true,
+                            "type": "string",
+                            "name": "ruleType"
+                          },
+                          {
+                            "name": "ruleItemGroups",
+                            "type": "array",
+                            "of": "object",
+                            "label": "Rule item groups",
+                            "sticky": true,
+                            "hint": "List of rule item groups that defines this rule. Rule item groups are grouped together based on rule type.",
+                            "optional": true,
+                            "properties": [
+                              {
+                                "name": "ruleItems",
+                                "type": "array",
+                                "of": "object",
+                                "label": "Rule items",
+                                "sticky": true,
+                                "hint": "Rule items that will be grouped together based on rule type.",
+                                "optional": true,
+                                "properties": [
+                                  {
+                                    "control_type": "text",
+                                    "label": "Name",
+                                    "sticky": true,
+                                    "optional": true,
+                                    "type": "string",
+                                    "name": "name"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_number_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Number comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: GREATER_THAN, GREATER_THAN_OR_EQUAL, EQUALS, NOT_EQUALS, LESS_THAN, LESS_THAN_OR_EQUAL and OR_OF_ANDS.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListNumberRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "number",
+                                        "label": "Value",
+                                        "parse_output": "float_conversion",
+                                        "sticky": true,
+                                        "hint": "Number value to be compared with the variable.",
+                                        "optional": true,
+                                        "type": "number",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "Number rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a number operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "numberRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_string_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "String comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: CONTAINS, EQUALS, STARTS_WITH, ENDS_WITH, NOT_EQUALS, NOT_CONTAINS, NOT_STARTS_WITH and NOT_ENDS_WITH.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListStringRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "text",
+                                        "label": "Value",
+                                        "sticky": true,
+                                        "hint": "The right hand side of the string rule item. For URLs or referrer URLs, the value can not contain illegal URL characters such as newlines, quotes, tabs, or parentheses.",
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "value"
+                                      }
+                                    ],
+                                    "label": "String rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a string operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "stringRuleItem"
+                                  },
+                                  {
+                                    "properties": [
+                                      {
+                                        "control_type": "select",
+                                        "label": "Operator",
+                                        "sticky": true,
+                                        "pick_list": "user_list_date_rule_operators",
+                                        "toggle_hint": "Select from options",
+                                        "hint": "Date comparison operator.",
+                                        "toggle_field": {
+                                          "name": "operator",
+                                          "label": "Operator",
+                                          "type": "string",
+                                          "optional": true,
+                                          "control_type": "text",
+                                          "toggle_hint": "Use custom value",
+                                          "hint": "Allowed values are: EQUALS, NOT_EQUALS, BEFORE and AFTER.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListDateRuleItemOperator' target='_blank'>here</a> for more details about the options."
+                                        },
+                                        "optional": true,
+                                        "type": "string",
+                                        "name": "operator"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Value",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "String representing date value to be compared with the rule variable. Times are reported in the customer's time zone.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "value"
+                                      },
+                                      {
+                                        "control_type": "date",
+                                        "label": "Offset in days",
+                                        "render_input": "date_conversion",
+                                        "parse_output": "date_conversion",
+                                        "sticky": true,
+                                        "hint": "The relative date value of the right hand side denoted by number of days offset from now. The value field will override this field when both are present.",
+                                        "optional": true,
+                                        "type": "date_time",
+                                        "name": "offsetInDays"
+                                      }
+                                    ],
+                                    "label": "Date rule item",
+                                    "sticky": true,
+                                    "hint": "An atomic rule item composed of a date operation.",
+                                    "optional": true,
+                                    "type": "object",
+                                    "name": "dateRuleItem"
+                                  }
+                                ]
+                              }
+                            ]
+                          }
+                        ],
+                        "label": "Rule",
+                        "sticky": true,
+                        "hint": "Boolean rule that defines this user list. The rule consists of a list of rule item groups and each rule item group consists of a list of rule items.",
+                        "optional": true,
+                        "type": "object",
+                        "name": "rule"
+                      }
+                    ],
+                    "label": "Expression rule user list",
+                    "sticky": true,
+                    "hint": "Visitors of a page. The page visit is defined by one boolean rule expression.",
+                    "optional": true,
+                    "type": "object",
+                    "name": "expressionRuleUserList"
+                  }
+                ],
+                "label": "Rule based user list",
+                "sticky": true,
+                "optional": true,
+                "type": "object",
+                "name": "ruleBasedUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "name": "rules",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Rules",
+                    "sticky": true,
+                    "hint": "Logical list rules that define this user list.",
+                    "optional": true,
+                    "properties": [
+                      {
+                        "control_type": "select",
+                        "label": "Operator",
+                        "sticky": true,
+                        "pick_list": "user_list_logical_rule_operators",
+                        "toggle_hint": "Select from options",
+                        "hint": "The logical operator of the rule.",
+                        "toggle_field": {
+                          "name": "operator",
+                          "label": "Operator",
+                          "type": "string",
+                          "optional": true,
+                          "control_type": "text",
+                          "toggle_hint": "Use custom value",
+                          "hint": "Allowed values are: ALL, ANY and NONE.<br>Click <a href='https://developers.google.com/google-ads/api/rest/reference/rest/v8/customers.userLists#UserListLogicalRuleOperator' target='_blank'>here</a> for more details about the options."
+                        },
+                        "optional": true,
+                        "type": "string",
+                        "name": "operator"
+                      },
+                      {
+                        "name": "ruleOperands",
+                        "type": "array",
+                        "of": "object",
+                        "label": "Rule operands",
+                        "sticky": true,
+                        "hint": "The list of operands of the rule.",
+                        "optional": true,
+                        "properties": [
+                          {
+                            "control_type": "text",
+                            "label": "User list",
+                            "sticky": true,
+                            "hint": "Resource name of a user list as an operand.",
+                            "optional": true,
+                            "type": "string",
+                            "name": "userList"
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "label": "Logical user list",
+                "sticky": true,
+                "hint": "User list that is a custom combination of user lists and user interests.",
+                "optional": true,
+                "type": "object",
+                "name": "logicalUserList"
+              },
+              {
+                "properties": [
+                  {
+                    "name": "actions",
+                    "type": "array",
+                    "of": "object",
+                    "label": "Actions",
+                    "sticky": true,
+                    "hint": "Actions associated with this user list.",
+                    "optional": true,
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Conversion action",
+                        "sticky": true,
+                        "hint": "A conversion action that's not generated from remarketing.",
+                        "optional": true,
+                        "type": "string",
+                        "name": "conversionAction"
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "Remarketing action",
+                        "sticky": true,
+                        "hint": "A remarketing action.",
+                        "optional": true,
+                        "type": "string",
+                        "name": "remarketingAction"
+                      }
+                    ]
+                  }
+                ],
+                "label": "Basic user list",
+                "sticky": true,
+                "hint": "User list targeting as a collection of conversion or remarketing actions.",
+                "optional": true,
+                "type": "object",
+                "name": "basicUserList"
+              }
+            ]
+          },
+          {
+            "type": "string",
+            "name": "nextPageToken",
+            "control_type": "text",
+            "label": "Next page token",
+            "optional": true
+          },
+          {
+            "type": "integer",
+            "name": "totalResultsCount",
+            "control_type": "number",
+            "label": "Total results count",
+            "optional": true,
+            "parse_output": "integer_conversion"
+          },
+          {
+            "type": "string",
+            "name": "fieldMask",
+            "control_type": "text",
+            "label": "Field mask",
+            "optional": true
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "string",
+            "name": "client_customer_id",
+            "control_type": "text",
+            "label": "Client customer ID",
+            "hint": "Customer ID of the target Google Ads account, typically in the form of \"1234567890\". <b>It must be the advertising account being managed by your manager account.</b>",
+            "optional": false
+          },
+          {
+            "type": "string",
+            "name": "fields",
+            "control_type": "multiselect",
+            "label": "Fields",
+            "hint": "The list of fields to include in the result. All fields will be returned by default.",
+            "sticky": true,
+            "pick_list": "user_list_fields",
+            "optional": true,
+            "toggle_hint": "Select from options",
+            "toggle_field": {
+              "name": "fields",
+              "label": "Field names",
+              "type": "string",
+              "control_type": "text",
+              "optional": true,
+              "toggle_hint": "Use custom value",
+              "hint": "Enter field names separated by comma. Click <a href='https://developers.google.com/google-ads/api/fields/v8/user_list_query_builder' target='_blank'>here</a> for more details about the selectable fields (under SELECT clause)."
+            },
+            "delimiter": ","
+          },
+          {
+            "type": "string",
+            "name": "filter",
+            "control_type": "text",
+            "label": "Query filter",
+            "hint": "Enter a query filter (<b>WHERE clause</b>) using <a href='https://developers.google.com/google-ads/api/docs/query/grammar?hl=en' target='_blank'>Google Ads Query Language</a>.<br>e.g. <b>campaign.status = 'PAUSED'</b> or <b>segments.date DURING LAST_30_DAYS</b><br>Click <a href='https://developers.google.com/google-ads/api/fields/v8/user_list_query_builder' target='_blank'>here</a> for more details about the filterable fields and supported operators (under WHERE clause).",
+            "sticky": true,
+            "optional": true
+          },
+          {
+            "type": "object",
+            "name": "ordering",
+            "label": "Ordering",
+            "sticky": true,
+            "optional": true,
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Sort field",
+                "sticky": true,
+                "hint": "Enter field name. Click <a href='https://developers.google.com/google-ads/api/fields/v8/user_list_query_builder' target='_blank'>here</a> for more details about the sortable fields (under ORDER BY clause). e.g. <b>campaign.id</b>",
+                "optional": true,
+                "type": "string",
+                "name": "sort_field"
+              },
+              {
+                "control_type": "select",
+                "label": "Sort order",
+                "sticky": true,
+                "hint": "The order to sort the results on.",
+                "pick_list": "sort_order",
+                "toggle_hint": "Select from options",
+                "toggle_field": {
+                  "name": "sort_order",
+                  "label": "Sort order",
+                  "type": "string",
+                  "optional": true,
+                  "control_type": "text",
+                  "toggle_hint": "Use custom value",
+                  "hint": "Allowed values are: DESC, ASC"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "sort_order"
+              }
+            ]
+          },
+          {
+            "type": "string",
+            "name": "page_token",
+            "control_type": "text",
+            "label": "Page token",
+            "hint": "Token of the page to retrieve. If not specified, the first page of results will be returned. Use the value obtained from <b>Next page token</b> in the previous response in order to request the next page of results.",
+            "optional": true
+          },
+          {
+            "type": "integer",
+            "name": "page_size",
+            "control_type": "integer",
+            "label": "Page size",
+            "hint": "Maximum number of results to return in this page. Set this to a reasonable value to limit the number of results returned per page.<br>The default value is 100.",
+            "default": "100",
+            "optional": true,
+            "parse_output": "integer_conversion"
+          }
+        ],
+        "uuid": "bf9105c9-0582-4c04-a2e7-89da0d035b89",
+        "skip": true
+      }
+    ],
+    "uuid": "2c7d0378-73a7-4b4e-9f6d-090ae2081d60"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "google_ads_connector_568507_1641935682",
+      "account_id": {
+        "zip_name": "WIP/my_google_ads_account.connection.json",
+        "name": "My Google Ads account",
+        "folder": "WIP",
+        "custom": true
+      },
+      "skip_validation": false
+    }
+  ]
+}
