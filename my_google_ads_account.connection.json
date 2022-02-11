@@ -1,0 +1,10 @@
+{
+  "name": "My Google Ads account",
+  "provider": {
+    "zip_name": "google_ads.custom_adapter.json",
+    "name": "Google Ads",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}
