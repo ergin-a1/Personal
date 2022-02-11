@@ -1,0 +1,119 @@
+{
+  "name": "dummy-job-registration-function",
+  "description": "When there is a function call, do action",
+  "version": 10,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "4652c5b9",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"jobId\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[{\"name\":\"jobId\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"},{\"name\":\"epoch_last_execution\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Job ID",
+            "name": "jobId",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "e4abffd1",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "jobId": "#{_('data.workato_recipe_function.4652c5b9.parameters.jobId')}",
+            "epoch_last_execution": "1547810608"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Job ID",
+                "name": "jobId",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch last execution",
+                "parse_output": "float_conversion",
+                "name": "epoch_last_execution",
+                "type": "number",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Job ID",
+                "name": "jobId",
+                "type": "string",
+                "optional": false
+              },
+              {
+                "control_type": "number",
+                "label": "Epoch last execution",
+                "parse_output": "float_conversion",
+                "name": "epoch_last_execution",
+                "type": "number",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "d5692fde-6216-47f8-ba7c-229b266a5335"
+      }
+    ],
+    "uuid": "45472ec8-edac-4bc3-8ab0-e54bc6d61c1d"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
