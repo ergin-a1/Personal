@@ -1,0 +1,991 @@
+{
+  "name": "hs-get-campaign",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 37,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "bf4f6c74",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> every 1 days at <span class=\"provider\">01:00:00 AM</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "time_unit": "Days"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "days",
+      "trigger_every": "1",
+      "trigger_at": "01:00:00"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "string",
+        "name": "trigger_at",
+        "control_type": "time",
+        "label": "Trigger at",
+        "hint": "Set a time to schedule the job.",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      },
+      {
+        "type": "string",
+        "name": "timezone",
+        "control_type": "select",
+        "label": "Timezone",
+        "hint": "Select the timezone to use. Leave it blank to use <b>(GMT-08:00) Pacific Time (US & Canada)</b>",
+        "pick_list": [
+          [
+            "International Date Line West",
+            "Etc/GMT+12"
+          ],
+          [
+            "Midway Island",
+            "Pacific/Midway"
+          ],
+          [
+            "American Samoa",
+            "Pacific/Pago_Pago"
+          ],
+          [
+            "Hawaii",
+            "Pacific/Honolulu"
+          ],
+          [
+            "Alaska",
+            "America/Juneau"
+          ],
+          [
+            "Pacific Time (US & Canada)",
+            "America/Los_Angeles"
+          ],
+          [
+            "Tijuana",
+            "America/Tijuana"
+          ],
+          [
+            "Mountain Time (US & Canada)",
+            "America/Denver"
+          ],
+          [
+            "Arizona",
+            "America/Phoenix"
+          ],
+          [
+            "Chihuahua",
+            "America/Chihuahua"
+          ],
+          [
+            "Mazatlan",
+            "America/Mazatlan"
+          ],
+          [
+            "Central Time (US & Canada)",
+            "America/Chicago"
+          ],
+          [
+            "Saskatchewan",
+            "America/Regina"
+          ],
+          [
+            "Guadalajara",
+            "America/Mexico_City"
+          ],
+          [
+            "Mexico City",
+            "America/Mexico_City"
+          ],
+          [
+            "Monterrey",
+            "America/Monterrey"
+          ],
+          [
+            "Central America",
+            "America/Guatemala"
+          ],
+          [
+            "Eastern Time (US & Canada)",
+            "America/New_York"
+          ],
+          [
+            "Indiana (East)",
+            "America/Indiana/Indianapolis"
+          ],
+          [
+            "Bogota",
+            "America/Bogota"
+          ],
+          [
+            "Lima",
+            "America/Lima"
+          ],
+          [
+            "Quito",
+            "America/Lima"
+          ],
+          [
+            "Atlantic Time (Canada)",
+            "America/Halifax"
+          ],
+          [
+            "Caracas",
+            "America/Caracas"
+          ],
+          [
+            "La Paz",
+            "America/La_Paz"
+          ],
+          [
+            "Santiago",
+            "America/Santiago"
+          ],
+          [
+            "Newfoundland",
+            "America/St_Johns"
+          ],
+          [
+            "Brasilia",
+            "America/Sao_Paulo"
+          ],
+          [
+            "Buenos Aires",
+            "America/Argentina/Buenos_Aires"
+          ],
+          [
+            "Montevideo",
+            "America/Montevideo"
+          ],
+          [
+            "Georgetown",
+            "America/Guyana"
+          ],
+          [
+            "Puerto Rico",
+            "America/Puerto_Rico"
+          ],
+          [
+            "Greenland",
+            "America/Godthab"
+          ],
+          [
+            "Mid-Atlantic",
+            "Atlantic/South_Georgia"
+          ],
+          [
+            "Azores",
+            "Atlantic/Azores"
+          ],
+          [
+            "Cape Verde Is.",
+            "Atlantic/Cape_Verde"
+          ],
+          [
+            "Dublin",
+            "Europe/Dublin"
+          ],
+          [
+            "Edinburgh",
+            "Europe/London"
+          ],
+          [
+            "Lisbon",
+            "Europe/Lisbon"
+          ],
+          [
+            "London",
+            "Europe/London"
+          ],
+          [
+            "Casablanca",
+            "Africa/Casablanca"
+          ],
+          [
+            "Monrovia",
+            "Africa/Monrovia"
+          ],
+          [
+            "UTC",
+            "Etc/UTC"
+          ],
+          [
+            "Belgrade",
+            "Europe/Belgrade"
+          ],
+          [
+            "Bratislava",
+            "Europe/Bratislava"
+          ],
+          [
+            "Budapest",
+            "Europe/Budapest"
+          ],
+          [
+            "Ljubljana",
+            "Europe/Ljubljana"
+          ],
+          [
+            "Prague",
+            "Europe/Prague"
+          ],
+          [
+            "Sarajevo",
+            "Europe/Sarajevo"
+          ],
+          [
+            "Skopje",
+            "Europe/Skopje"
+          ],
+          [
+            "Warsaw",
+            "Europe/Warsaw"
+          ],
+          [
+            "Zagreb",
+            "Europe/Zagreb"
+          ],
+          [
+            "Brussels",
+            "Europe/Brussels"
+          ],
+          [
+            "Copenhagen",
+            "Europe/Copenhagen"
+          ],
+          [
+            "Madrid",
+            "Europe/Madrid"
+          ],
+          [
+            "Paris",
+            "Europe/Paris"
+          ],
+          [
+            "Amsterdam",
+            "Europe/Amsterdam"
+          ],
+          [
+            "Berlin",
+            "Europe/Berlin"
+          ],
+          [
+            "Bern",
+            "Europe/Zurich"
+          ],
+          [
+            "Zurich",
+            "Europe/Zurich"
+          ],
+          [
+            "Rome",
+            "Europe/Rome"
+          ],
+          [
+            "Stockholm",
+            "Europe/Stockholm"
+          ],
+          [
+            "Vienna",
+            "Europe/Vienna"
+          ],
+          [
+            "West Central Africa",
+            "Africa/Algiers"
+          ],
+          [
+            "Bucharest",
+            "Europe/Bucharest"
+          ],
+          [
+            "Cairo",
+            "Africa/Cairo"
+          ],
+          [
+            "Helsinki",
+            "Europe/Helsinki"
+          ],
+          [
+            "Kyiv",
+            "Europe/Kiev"
+          ],
+          [
+            "Riga",
+            "Europe/Riga"
+          ],
+          [
+            "Sofia",
+            "Europe/Sofia"
+          ],
+          [
+            "Tallinn",
+            "Europe/Tallinn"
+          ],
+          [
+            "Vilnius",
+            "Europe/Vilnius"
+          ],
+          [
+            "Athens",
+            "Europe/Athens"
+          ],
+          [
+            "Istanbul",
+            "Europe/Istanbul"
+          ],
+          [
+            "Minsk",
+            "Europe/Minsk"
+          ],
+          [
+            "Jerusalem",
+            "Asia/Jerusalem"
+          ],
+          [
+            "Harare",
+            "Africa/Harare"
+          ],
+          [
+            "Pretoria",
+            "Africa/Johannesburg"
+          ],
+          [
+            "Kaliningrad",
+            "Europe/Kaliningrad"
+          ],
+          [
+            "Moscow",
+            "Europe/Moscow"
+          ],
+          [
+            "St. Petersburg",
+            "Europe/Moscow"
+          ],
+          [
+            "Volgograd",
+            "Europe/Volgograd"
+          ],
+          [
+            "Samara",
+            "Europe/Samara"
+          ],
+          [
+            "Kuwait",
+            "Asia/Kuwait"
+          ],
+          [
+            "Riyadh",
+            "Asia/Riyadh"
+          ],
+          [
+            "Nairobi",
+            "Africa/Nairobi"
+          ],
+          [
+            "Baghdad",
+            "Asia/Baghdad"
+          ],
+          [
+            "Tehran",
+            "Asia/Tehran"
+          ],
+          [
+            "Abu Dhabi",
+            "Asia/Muscat"
+          ],
+          [
+            "Muscat",
+            "Asia/Muscat"
+          ],
+          [
+            "Baku",
+            "Asia/Baku"
+          ],
+          [
+            "Tbilisi",
+            "Asia/Tbilisi"
+          ],
+          [
+            "Yerevan",
+            "Asia/Yerevan"
+          ],
+          [
+            "Kabul",
+            "Asia/Kabul"
+          ],
+          [
+            "Ekaterinburg",
+            "Asia/Yekaterinburg"
+          ],
+          [
+            "Islamabad",
+            "Asia/Karachi"
+          ],
+          [
+            "Karachi",
+            "Asia/Karachi"
+          ],
+          [
+            "Tashkent",
+            "Asia/Tashkent"
+          ],
+          [
+            "Chennai",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kolkata",
+            "Asia/Kolkata"
+          ],
+          [
+            "Mumbai",
+            "Asia/Kolkata"
+          ],
+          [
+            "New Delhi",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kathmandu",
+            "Asia/Kathmandu"
+          ],
+          [
+            "Astana",
+            "Asia/Dhaka"
+          ],
+          [
+            "Dhaka",
+            "Asia/Dhaka"
+          ],
+          [
+            "Sri Jayawardenepura",
+            "Asia/Colombo"
+          ],
+          [
+            "Almaty",
+            "Asia/Almaty"
+          ],
+          [
+            "Novosibirsk",
+            "Asia/Novosibirsk"
+          ],
+          [
+            "Rangoon",
+            "Asia/Rangoon"
+          ],
+          [
+            "Bangkok",
+            "Asia/Bangkok"
+          ],
+          [
+            "Hanoi",
+            "Asia/Bangkok"
+          ],
+          [
+            "Jakarta",
+            "Asia/Jakarta"
+          ],
+          [
+            "Krasnoyarsk",
+            "Asia/Krasnoyarsk"
+          ],
+          [
+            "Beijing",
+            "Asia/Shanghai"
+          ],
+          [
+            "Chongqing",
+            "Asia/Chongqing"
+          ],
+          [
+            "Hong Kong",
+            "Asia/Hong_Kong"
+          ],
+          [
+            "Urumqi",
+            "Asia/Urumqi"
+          ],
+          [
+            "Kuala Lumpur",
+            "Asia/Kuala_Lumpur"
+          ],
+          [
+            "Singapore",
+            "Asia/Singapore"
+          ],
+          [
+            "Taipei",
+            "Asia/Taipei"
+          ],
+          [
+            "Perth",
+            "Australia/Perth"
+          ],
+          [
+            "Irkutsk",
+            "Asia/Irkutsk"
+          ],
+          [
+            "Ulaanbaatar",
+            "Asia/Ulaanbaatar"
+          ],
+          [
+            "Seoul",
+            "Asia/Seoul"
+          ],
+          [
+            "Osaka",
+            "Asia/Tokyo"
+          ],
+          [
+            "Sapporo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Tokyo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Yakutsk",
+            "Asia/Yakutsk"
+          ],
+          [
+            "Darwin",
+            "Australia/Darwin"
+          ],
+          [
+            "Adelaide",
+            "Australia/Adelaide"
+          ],
+          [
+            "Canberra",
+            "Australia/Melbourne"
+          ],
+          [
+            "Melbourne",
+            "Australia/Melbourne"
+          ],
+          [
+            "Sydney",
+            "Australia/Sydney"
+          ],
+          [
+            "Brisbane",
+            "Australia/Brisbane"
+          ],
+          [
+            "Hobart",
+            "Australia/Hobart"
+          ],
+          [
+            "Vladivostok",
+            "Asia/Vladivostok"
+          ],
+          [
+            "Guam",
+            "Pacific/Guam"
+          ],
+          [
+            "Port Moresby",
+            "Pacific/Port_Moresby"
+          ],
+          [
+            "Magadan",
+            "Asia/Magadan"
+          ],
+          [
+            "Srednekolymsk",
+            "Asia/Srednekolymsk"
+          ],
+          [
+            "Solomon Is.",
+            "Pacific/Guadalcanal"
+          ],
+          [
+            "New Caledonia",
+            "Pacific/Noumea"
+          ],
+          [
+            "Fiji",
+            "Pacific/Fiji"
+          ],
+          [
+            "Kamchatka",
+            "Asia/Kamchatka"
+          ],
+          [
+            "Marshall Is.",
+            "Pacific/Majuro"
+          ],
+          [
+            "Auckland",
+            "Pacific/Auckland"
+          ],
+          [
+            "Wellington",
+            "Pacific/Auckland"
+          ],
+          [
+            "Nuku'alofa",
+            "Pacific/Tongatapu"
+          ],
+          [
+            "Tokelau Is.",
+            "Pacific/Fakaofo"
+          ],
+          [
+            "Chatham Is.",
+            "Pacific/Chatham"
+          ],
+          [
+            "Samoa",
+            "Pacific/Apia"
+          ]
+        ],
+        "optional": true
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "new_connector_1_connector_568507_1640853883",
+        "name": "get_campaigns",
+        "as": "27e16951",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "from_timestamp": "1641387282",
+          "to_timestamp": "1642683282"
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "data",
+            "label": "Data",
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Object",
+                "details": {
+                  "real_name": "object"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "object"
+              },
+              {
+                "control_type": "text",
+                "label": "Id",
+                "details": {
+                  "real_name": "id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "id"
+              },
+              {
+                "control_type": "text",
+                "label": "Name",
+                "details": {
+                  "real_name": "name"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "name"
+              },
+              {
+                "control_type": "text",
+                "label": "Subject",
+                "details": {
+                  "real_name": "subject"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "subject"
+              },
+              {
+                "control_type": "text",
+                "label": "From Email",
+                "details": {
+                  "real_name": "from_email"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "from_email"
+              },
+              {
+                "control_type": "text",
+                "label": "From Name",
+                "details": {
+                  "real_name": "from_name"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "from_name"
+              },
+              {
+                "control_type": "text",
+                "label": "Status",
+                "details": {
+                  "real_name": "status"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "status"
+              },
+              {
+                "control_type": "text",
+                "label": "Status Id",
+                "details": {
+                  "real_name": "status_id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "status_id"
+              },
+              {
+                "control_type": "text",
+                "label": "Status Label",
+                "details": {
+                  "real_name": "status_label"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "status_label"
+              },
+              {
+                "control_type": "text",
+                "label": "Sent At",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "details": {
+                  "real_name": "sent_at"
+                },
+                "optional": true,
+                "type": "date_time",
+                "name": "sent_at"
+              },
+              {
+                "control_type": "text",
+                "label": "Send Time",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "details": {
+                  "real_name": "send_time"
+                },
+                "optional": true,
+                "type": "date_time",
+                "name": "send_time"
+              },
+              {
+                "control_type": "text",
+                "label": "Created",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "details": {
+                  "real_name": "created"
+                },
+                "optional": true,
+                "type": "date_time",
+                "name": "created"
+              },
+              {
+                "control_type": "text",
+                "label": "Updated",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "details": {
+                  "real_name": "updated"
+                },
+                "optional": true,
+                "type": "date_time",
+                "name": "updated"
+              },
+              {
+                "control_type": "text",
+                "label": "Number of recipients",
+                "details": {
+                  "real_name": "num_recipients"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "num_recipients"
+              },
+              {
+                "control_type": "text",
+                "label": "Campaign Type",
+                "details": {
+                  "real_name": "campaign_type"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "campaign_type"
+              },
+              {
+                "control_type": "text",
+                "label": "Is segmented",
+                "details": {
+                  "real_name": "is_segmented"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "is_segmented"
+              },
+              {
+                "control_type": "text",
+                "label": "Message Type",
+                "details": {
+                  "real_name": "message_type"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "message_type"
+              },
+              {
+                "control_type": "text",
+                "label": "Template Id",
+                "details": {
+                  "real_name": "template_id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "template_id"
+              }
+            ]
+          }
+        ],
+        "uuid": "328f9311-1a39-43c5-8f08-dc62c7e13712"
+      },
+      {
+        "number": 2,
+        "provider": "csv_parser",
+        "name": "create_csv_lines",
+        "as": "4a8b1740",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "create_header_line": true,
+          "force_quotes": true
+        },
+        "input": {
+          "create_header_line": "true",
+          "column_separator": "|",
+          "force_quotes": "true",
+          "column_labels": "SourceCampaignNumber|Name|Subject|MessageFrom|SendDate|DateCreated|DateModified|Type",
+          "lines": {
+            "____source": "#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data')}",
+            "column_0": "#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.id')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.name')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.subject')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.from_email')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.send_time')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.created')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.updated')}|#{_('data.new_connector_1_connector_568507_1640853883.27e16951.data.first.message_type')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "array",
+            "name": "lines",
+            "label": "CSV data lines",
+            "hint": "Provide field mappings for the CSV data below.",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "SourceCampaignNumber|Name|Subject|MessageFrom|SendDate|DateCreated|DateModified|Type",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "column_0"
+              }
+            ]
+          }
+        ],
+        "uuid": "d85b52cf-f1a9-467e-b3ae-c0374cf11b0c"
+      },
+      {
+        "number": 3,
+        "provider": "sftp_secondary",
+        "name": "upload",
+        "as": "af257eb2",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "append": true
+        },
+        "input": {
+          "filename": "=\"/435/Campaigns_Klaviyo_\"+now.strftime(\"%Y%m%d%H%M%S%L\")+\".csv\"",
+          "content": "#{_('data.csv_parser.4a8b1740.csv_lines')}",
+          "append": "false"
+        },
+        "uuid": "588f48a5-c52c-49d6-9646-830bfcb219e8"
+      }
+    ],
+    "uuid": "25fe161f-4832-4dff-aa71-8bfeee5c6671"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    }
+  ]
+}
