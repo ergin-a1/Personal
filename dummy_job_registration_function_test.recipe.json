@@ -1,0 +1,72 @@
+{
+  "name": "dummy-job-registration-function (test)",
+  "description": "When there is a function call, do action",
+  "version": 3,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "4652c5b9",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"jobId\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[{\"name\":\"jobId\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"},{\"name\":\"epoch_last_execution\",\"type\":\"number\",\"optional\":false,\"control_type\":\"number\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "Job ID",
+            "name": "jobId",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "logger",
+        "name": "log_message",
+        "as": "e61f22e8",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "message": "executed child"
+        },
+        "uuid": "1d8aa60c-67a7-41e2-a8d7-f8c2feb2e39b"
+      }
+    ],
+    "uuid": "45472ec8-edac-4bc3-8ab0-e54bc6d61c1d"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "logger",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
