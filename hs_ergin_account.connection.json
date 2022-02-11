@@ -1,0 +1,10 @@
+{
+  "name": "hs-ergin-account",
+  "provider": {
+    "zip_name": "klaviyo_hs.custom_adapter.json",
+    "name": "Klaviyo - HS",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}
