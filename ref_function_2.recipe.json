@@ -1,0 +1,73 @@
+{
+  "name": "ref-function-2",
+  "description": "When there is a function call, do action",
+  "version": 3,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "e2121ea4",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+    },
+    "block": [
+      {
+        "number": 1,
+        "provider": "new_connector_1_connector_568507_1642069355",
+        "name": "search_email",
+        "as": "2932d682",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "email_id": "123@test.com"
+        },
+        "extended_output_schema": [
+          {
+            "type": "string",
+            "name": "id",
+            "control_type": "text",
+            "label": "Id",
+            "optional": true,
+            "details": {
+              "real_name": "id"
+            }
+          }
+        ],
+        "uuid": "b07fb9b4-2b88-441c-acdb-736515414b27"
+      }
+    ],
+    "uuid": "d972c12d-358a-4ad2-8d83-6ca26fdcfc76"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1642069355",
+      "account_id": {
+        "zip_name": "my_sample_2_account.connection.json",
+        "name": "My sample-2 account",
+        "folder": "",
+        "custom": true
+      },
+      "skip_validation": false
+    }
+  ]
+}
