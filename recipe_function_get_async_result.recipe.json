@@ -1,0 +1,736 @@
+{
+  "name": "recipe-function-get-async-result",
+  "description": "When there is a function call, do action",
+  "version": 5,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "workato_recipe_function",
+    "name": "execute",
+    "as": "cebaba46",
+    "title": null,
+    "description": null,
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "parameters_schema_json": "[{\"name\":\"fileSuffix\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]",
+      "result_schema_json": "[{\"name\":\"result\",\"type\":\"string\",\"optional\":false,\"control_type\":\"text\"}]"
+    },
+    "extended_output_schema": [
+      {
+        "type": "object",
+        "name": "parameters",
+        "label": "Parameters",
+        "properties": [
+          {
+            "control_type": "text",
+            "label": "File suffix",
+            "name": "fileSuffix",
+            "type": "string",
+            "optional": false
+          }
+        ]
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "keyword": "try",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+        },
+        "block": [
+          {
+            "number": 2,
+            "provider": "lookup_table",
+            "name": "search_entries",
+            "as": "a320492c",
+            "title": null,
+            "description": "\n      Search\n      <span class=\"provider\">entries</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "Events_#{_('data.workato_recipe_function.cebaba46.parameters.fileSuffix')}"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "entries",
+                "label": "Entries",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion",
+                    "type": "integer",
+                    "name": "id"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "label": "Entry",
+                    "type": "object",
+                    "name": "entry"
+                  }
+                ]
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Search by",
+                "hint": "Provide one or more entry fields to search the entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "job_ref",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "status",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ]
+              }
+            ],
+            "uuid": "685743e3-4856-445c-ad56-caa030be4f8e"
+          },
+          {
+            "number": 3,
+            "provider": "lookup_table",
+            "name": "search_entries",
+            "as": "d6a32773",
+            "title": null,
+            "description": "\n      Search\n      <span class=\"provider\">entries</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "Campaigns_#{_('data.workato_recipe_function.cebaba46.parameters.fileSuffix')}"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "entries",
+                "label": "Entries",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion",
+                    "type": "integer",
+                    "name": "id"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "label": "Entry",
+                    "type": "object",
+                    "name": "entry"
+                  }
+                ]
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Search by",
+                "hint": "Provide one or more entry fields to search the entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "job_ref",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "status",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ]
+              }
+            ],
+            "uuid": "99edb890-a54c-42d4-90ba-d94a4340eb33"
+          },
+          {
+            "number": 4,
+            "provider": "lookup_table",
+            "name": "search_entries",
+            "as": "5458f3f0",
+            "title": null,
+            "description": "\n      Search\n      <span class=\"provider\">entries</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "Exclusions_#{_('data.workato_recipe_function.cebaba46.parameters.fileSuffix')}"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "entries",
+                "label": "Entries",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion",
+                    "type": "integer",
+                    "name": "id"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "label": "Entry",
+                    "type": "object",
+                    "name": "entry"
+                  }
+                ]
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Search by",
+                "hint": "Provide one or more entry fields to search the entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "job_ref",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "status",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ]
+              }
+            ],
+            "uuid": "907d51bd-782a-433e-872f-e40d7b066f55"
+          },
+          {
+            "number": 5,
+            "provider": "lookup_table",
+            "name": "search_entries",
+            "as": "0ef23857",
+            "title": null,
+            "description": "\n      Search\n      <span class=\"provider\">entries</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "parameters": {
+                "col1": "Contacts_#{_('data.workato_recipe_function.cebaba46.parameters.fileSuffix')}"
+              }
+            },
+            "extended_output_schema": [
+              {
+                "type": "array",
+                "name": "entries",
+                "label": "Entries",
+                "of": "object",
+                "properties": [
+                  {
+                    "control_type": "number",
+                    "label": "Entry ID",
+                    "parse_output": "integer_conversion",
+                    "type": "integer",
+                    "name": "id"
+                  },
+                  {
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "job_ref",
+                        "name": "col1",
+                        "type": "string",
+                        "sticky": true
+                      },
+                      {
+                        "control_type": "text",
+                        "label": "status",
+                        "name": "col2",
+                        "type": "string",
+                        "sticky": true
+                      }
+                    ],
+                    "label": "Entry",
+                    "type": "object",
+                    "name": "entry"
+                  }
+                ]
+              }
+            ],
+            "extended_input_schema": [
+              {
+                "type": "object",
+                "name": "parameters",
+                "label": "Search by",
+                "hint": "Provide one or more entry fields to search the entry",
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "job_ref",
+                    "name": "col1",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "status",
+                    "name": "col2",
+                    "type": "string",
+                    "sticky": true,
+                    "optional": true
+                  }
+                ]
+              }
+            ],
+            "uuid": "6635b4ba-0150-48d5-9b32-468ee534d4aa"
+          },
+          {
+            "number": 6,
+            "provider": "lookup_table",
+            "name": "delete_entry",
+            "as": "844632b1",
+            "title": null,
+            "description": "\n      Delete\n      <span class=\"provider\">entry</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+              "ignore_not_found": true
+            },
+            "input": {
+              "ignore_not_found": "true",
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "id": "#{_('data.lookup_table.a320492c.entries.first.id')}"
+            },
+            "uuid": "d3776ba1-b228-407c-a72a-6c70708aaa92"
+          },
+          {
+            "number": 7,
+            "provider": "lookup_table",
+            "name": "delete_entry",
+            "as": "691e1a6d",
+            "title": null,
+            "description": "\n      Delete\n      <span class=\"provider\">entry</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+              "ignore_not_found": true
+            },
+            "input": {
+              "ignore_not_found": "true",
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "id": "#{_('data.lookup_table.d6a32773.entries.first.id')}"
+            },
+            "uuid": "bf0da1a5-be06-4ceb-b91c-3d7973fc06fa"
+          },
+          {
+            "number": 8,
+            "provider": "lookup_table",
+            "name": "delete_entry",
+            "as": "93108458",
+            "title": null,
+            "description": "\n      Delete\n      <span class=\"provider\">entry</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+              "ignore_not_found": true
+            },
+            "input": {
+              "ignore_not_found": "true",
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "id": "#{_('data.lookup_table.5458f3f0.entries.first.id')}"
+            },
+            "uuid": "ce3f2ebe-ba67-44f7-a45e-bc795a256573"
+          },
+          {
+            "number": 9,
+            "provider": "lookup_table",
+            "name": "delete_entry",
+            "as": "c16a2535",
+            "title": null,
+            "description": "\n      Delete\n      <span class=\"provider\">entry</span>\n      in\n      <span class=\"provider\">async-job-result</span>\n      lookup table\n    ",
+            "keyword": "action",
+            "dynamicPickListSelection": {
+              "lookup_table_id": "async-job-result"
+            },
+            "toggleCfg": {
+              "ignore_not_found": true
+            },
+            "input": {
+              "ignore_not_found": "true",
+              "lookup_table_id": {
+                "zip_name": "async_job_result.lookup_table.json",
+                "name": "async-job-result",
+                "folder": ""
+              },
+              "id": "#{_('data.lookup_table.0ef23857.entries.first.id')}"
+            },
+            "uuid": "641ece12-6b7b-4a2a-a836-f9405aa27472"
+          },
+          {
+            "number": 10,
+            "keyword": "if",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "type": "compound",
+              "operand": "or",
+              "conditions": [
+                {
+                  "operand": "not_equals_to",
+                  "lhs": "#{_('data.lookup_table.a320492c.entries.first.entry.col2')}",
+                  "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+                  "uuid": "condition-010433b9-60b9-425a-a814-91d546f17ade"
+                },
+                {
+                  "operand": "not_equals_to",
+                  "lhs": "#{_('data.lookup_table.d6a32773.entries.first.entry.col2')}",
+                  "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+                  "uuid": "condition-2ac925d8-3e50-485a-beca-af5ca82845a9"
+                },
+                {
+                  "operand": "not_equals_to",
+                  "lhs": "#{_('data.lookup_table.5458f3f0.entries.first.entry.col2')}",
+                  "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+                  "uuid": "condition-9b9e0b97-4524-4a3d-be0a-8987014e82cf"
+                },
+                {
+                  "operand": "not_equals_to",
+                  "lhs": "#{_('data.lookup_table.0ef23857.entries.first.entry.col2')}",
+                  "rhs": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}",
+                  "uuid": "condition-d712a978-9260-4713-b9ea-a4fedf22db01"
+                }
+              ]
+            },
+            "block": [
+              {
+                "number": 11,
+                "provider": "workato_recipe_function",
+                "name": "return_result",
+                "as": "faf8b71c",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "result": {
+                    "result": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "2030b0fc-eb36-453b-ad63-edbe79d0e2ad"
+              }
+            ],
+            "uuid": "41ab522e-89be-46fd-a9ce-fa93998c8516"
+          },
+          {
+            "number": 12,
+            "as": "6fede909",
+            "keyword": "catch",
+            "dynamicPickListSelection": {
+            },
+            "toggleCfg": {
+            },
+            "input": {
+              "max_retry_count": "3",
+              "retry_interval": "5"
+            },
+            "block": [
+              {
+                "number": 13,
+                "provider": "workato_recipe_function",
+                "name": "return_result",
+                "as": "8db5bf7f",
+                "title": null,
+                "description": null,
+                "keyword": "action",
+                "dynamicPickListSelection": {
+                },
+                "toggleCfg": {
+                },
+                "input": {
+                  "result": {
+                    "result": "#{_('data.workato.job_context.account_properties.FAILURE', 'account_property', 'FAILURE')}"
+                  }
+                },
+                "extended_output_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "extended_input_schema": [
+                  {
+                    "type": "object",
+                    "name": "result",
+                    "label": "Result",
+                    "properties": [
+                      {
+                        "control_type": "text",
+                        "label": "Result",
+                        "name": "result",
+                        "type": "string",
+                        "optional": false
+                      }
+                    ]
+                  }
+                ],
+                "uuid": "b016ab61-cd7c-4926-8aad-038d3c5f020b"
+              }
+            ],
+            "uuid": "ce7e0608-28dc-4f94-9c77-456ebe28595b"
+          }
+        ],
+        "uuid": "b12d1b61-f49e-4930-851f-5c010ee1161f"
+      },
+      {
+        "number": 14,
+        "provider": "workato_recipe_function",
+        "name": "return_result",
+        "as": "5bb4fcbe",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "result": {
+            "result": "#{_('data.workato.job_context.account_properties.SUCCESS', 'account_property', 'SUCCESS')}"
+          }
+        },
+        "extended_output_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Result",
+                "name": "result",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "extended_input_schema": [
+          {
+            "type": "object",
+            "name": "result",
+            "label": "Result",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Result",
+                "name": "result",
+                "type": "string",
+                "optional": false
+              }
+            ]
+          }
+        ],
+        "uuid": "98426fa8-5f3d-4559-b10e-0b4b866379e8"
+      }
+    ],
+    "uuid": "8368720f-f1ba-4ca1-a4e6-831fbec7a122"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "workato_recipe_function",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "lookup_table",
+      "skip_validation": false,
+      "account_id": null
+    }
+  ]
+}
