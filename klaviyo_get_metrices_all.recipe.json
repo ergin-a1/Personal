@@ -1,0 +1,1249 @@
+{
+  "name": "klaviyo-get-metrices-all",
+  "description": "When there is a trigger on a specified schedule, do action",
+  "version": 10,
+  "private": true,
+  "concurrency": 1,
+  "code": {
+    "number": 0,
+    "provider": "clock",
+    "name": "scheduled_event",
+    "as": "a1a4586e",
+    "title": null,
+    "description": "<span class=\"provider\">Trigger</span> every 1 days at <span class=\"provider\">02:00:00 AM</span>",
+    "keyword": "trigger",
+    "dynamicPickListSelection": {
+      "time_unit": "Days"
+    },
+    "toggleCfg": {
+    },
+    "input": {
+      "time_unit": "days",
+      "trigger_every": "1",
+      "trigger_at": "02:00:00"
+    },
+    "extended_input_schema": [
+      {
+        "type": "string",
+        "name": "trigger_every",
+        "control_type": "integer",
+        "label": "Trigger every",
+        "hint": "Define repeating schedule. Enter whole numbers only.\n                        This field can be set to a minimum of 5 minutes.",
+        "default": "5",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "string",
+        "name": "trigger_at",
+        "control_type": "time",
+        "label": "Trigger at",
+        "hint": "Set a time to schedule the job.",
+        "optional": false,
+        "extends_schema": true
+      },
+      {
+        "type": "date_time",
+        "name": "start_after",
+        "control_type": "date_time",
+        "label": "Start after",
+        "hint": "Set date and time to start or leave blank to start immediately. <b>Once recipe has been run or tested, value cannot be changed.</b>",
+        "optional": true,
+        "extends_schema": true,
+        "since_field": true,
+        "render_input": "date_time_conversion",
+        "parse_output": "date_time_conversion"
+      },
+      {
+        "type": "string",
+        "name": "timezone",
+        "control_type": "select",
+        "label": "Timezone",
+        "hint": "Select the timezone to use. Leave it blank to use <b>(GMT-08:00) Pacific Time (US & Canada)</b>",
+        "pick_list": [
+          [
+            "International Date Line West",
+            "Etc/GMT+12"
+          ],
+          [
+            "Midway Island",
+            "Pacific/Midway"
+          ],
+          [
+            "American Samoa",
+            "Pacific/Pago_Pago"
+          ],
+          [
+            "Hawaii",
+            "Pacific/Honolulu"
+          ],
+          [
+            "Alaska",
+            "America/Juneau"
+          ],
+          [
+            "Pacific Time (US & Canada)",
+            "America/Los_Angeles"
+          ],
+          [
+            "Tijuana",
+            "America/Tijuana"
+          ],
+          [
+            "Mountain Time (US & Canada)",
+            "America/Denver"
+          ],
+          [
+            "Arizona",
+            "America/Phoenix"
+          ],
+          [
+            "Chihuahua",
+            "America/Chihuahua"
+          ],
+          [
+            "Mazatlan",
+            "America/Mazatlan"
+          ],
+          [
+            "Central Time (US & Canada)",
+            "America/Chicago"
+          ],
+          [
+            "Saskatchewan",
+            "America/Regina"
+          ],
+          [
+            "Guadalajara",
+            "America/Mexico_City"
+          ],
+          [
+            "Mexico City",
+            "America/Mexico_City"
+          ],
+          [
+            "Monterrey",
+            "America/Monterrey"
+          ],
+          [
+            "Central America",
+            "America/Guatemala"
+          ],
+          [
+            "Eastern Time (US & Canada)",
+            "America/New_York"
+          ],
+          [
+            "Indiana (East)",
+            "America/Indiana/Indianapolis"
+          ],
+          [
+            "Bogota",
+            "America/Bogota"
+          ],
+          [
+            "Lima",
+            "America/Lima"
+          ],
+          [
+            "Quito",
+            "America/Lima"
+          ],
+          [
+            "Atlantic Time (Canada)",
+            "America/Halifax"
+          ],
+          [
+            "Caracas",
+            "America/Caracas"
+          ],
+          [
+            "La Paz",
+            "America/La_Paz"
+          ],
+          [
+            "Santiago",
+            "America/Santiago"
+          ],
+          [
+            "Newfoundland",
+            "America/St_Johns"
+          ],
+          [
+            "Brasilia",
+            "America/Sao_Paulo"
+          ],
+          [
+            "Buenos Aires",
+            "America/Argentina/Buenos_Aires"
+          ],
+          [
+            "Montevideo",
+            "America/Montevideo"
+          ],
+          [
+            "Georgetown",
+            "America/Guyana"
+          ],
+          [
+            "Puerto Rico",
+            "America/Puerto_Rico"
+          ],
+          [
+            "Greenland",
+            "America/Godthab"
+          ],
+          [
+            "Mid-Atlantic",
+            "Atlantic/South_Georgia"
+          ],
+          [
+            "Azores",
+            "Atlantic/Azores"
+          ],
+          [
+            "Cape Verde Is.",
+            "Atlantic/Cape_Verde"
+          ],
+          [
+            "Dublin",
+            "Europe/Dublin"
+          ],
+          [
+            "Edinburgh",
+            "Europe/London"
+          ],
+          [
+            "Lisbon",
+            "Europe/Lisbon"
+          ],
+          [
+            "London",
+            "Europe/London"
+          ],
+          [
+            "Casablanca",
+            "Africa/Casablanca"
+          ],
+          [
+            "Monrovia",
+            "Africa/Monrovia"
+          ],
+          [
+            "UTC",
+            "Etc/UTC"
+          ],
+          [
+            "Belgrade",
+            "Europe/Belgrade"
+          ],
+          [
+            "Bratislava",
+            "Europe/Bratislava"
+          ],
+          [
+            "Budapest",
+            "Europe/Budapest"
+          ],
+          [
+            "Ljubljana",
+            "Europe/Ljubljana"
+          ],
+          [
+            "Prague",
+            "Europe/Prague"
+          ],
+          [
+            "Sarajevo",
+            "Europe/Sarajevo"
+          ],
+          [
+            "Skopje",
+            "Europe/Skopje"
+          ],
+          [
+            "Warsaw",
+            "Europe/Warsaw"
+          ],
+          [
+            "Zagreb",
+            "Europe/Zagreb"
+          ],
+          [
+            "Brussels",
+            "Europe/Brussels"
+          ],
+          [
+            "Copenhagen",
+            "Europe/Copenhagen"
+          ],
+          [
+            "Madrid",
+            "Europe/Madrid"
+          ],
+          [
+            "Paris",
+            "Europe/Paris"
+          ],
+          [
+            "Amsterdam",
+            "Europe/Amsterdam"
+          ],
+          [
+            "Berlin",
+            "Europe/Berlin"
+          ],
+          [
+            "Bern",
+            "Europe/Zurich"
+          ],
+          [
+            "Zurich",
+            "Europe/Zurich"
+          ],
+          [
+            "Rome",
+            "Europe/Rome"
+          ],
+          [
+            "Stockholm",
+            "Europe/Stockholm"
+          ],
+          [
+            "Vienna",
+            "Europe/Vienna"
+          ],
+          [
+            "West Central Africa",
+            "Africa/Algiers"
+          ],
+          [
+            "Bucharest",
+            "Europe/Bucharest"
+          ],
+          [
+            "Cairo",
+            "Africa/Cairo"
+          ],
+          [
+            "Helsinki",
+            "Europe/Helsinki"
+          ],
+          [
+            "Kyiv",
+            "Europe/Kiev"
+          ],
+          [
+            "Riga",
+            "Europe/Riga"
+          ],
+          [
+            "Sofia",
+            "Europe/Sofia"
+          ],
+          [
+            "Tallinn",
+            "Europe/Tallinn"
+          ],
+          [
+            "Vilnius",
+            "Europe/Vilnius"
+          ],
+          [
+            "Athens",
+            "Europe/Athens"
+          ],
+          [
+            "Istanbul",
+            "Europe/Istanbul"
+          ],
+          [
+            "Minsk",
+            "Europe/Minsk"
+          ],
+          [
+            "Jerusalem",
+            "Asia/Jerusalem"
+          ],
+          [
+            "Harare",
+            "Africa/Harare"
+          ],
+          [
+            "Pretoria",
+            "Africa/Johannesburg"
+          ],
+          [
+            "Kaliningrad",
+            "Europe/Kaliningrad"
+          ],
+          [
+            "Moscow",
+            "Europe/Moscow"
+          ],
+          [
+            "St. Petersburg",
+            "Europe/Moscow"
+          ],
+          [
+            "Volgograd",
+            "Europe/Volgograd"
+          ],
+          [
+            "Samara",
+            "Europe/Samara"
+          ],
+          [
+            "Kuwait",
+            "Asia/Kuwait"
+          ],
+          [
+            "Riyadh",
+            "Asia/Riyadh"
+          ],
+          [
+            "Nairobi",
+            "Africa/Nairobi"
+          ],
+          [
+            "Baghdad",
+            "Asia/Baghdad"
+          ],
+          [
+            "Tehran",
+            "Asia/Tehran"
+          ],
+          [
+            "Abu Dhabi",
+            "Asia/Muscat"
+          ],
+          [
+            "Muscat",
+            "Asia/Muscat"
+          ],
+          [
+            "Baku",
+            "Asia/Baku"
+          ],
+          [
+            "Tbilisi",
+            "Asia/Tbilisi"
+          ],
+          [
+            "Yerevan",
+            "Asia/Yerevan"
+          ],
+          [
+            "Kabul",
+            "Asia/Kabul"
+          ],
+          [
+            "Ekaterinburg",
+            "Asia/Yekaterinburg"
+          ],
+          [
+            "Islamabad",
+            "Asia/Karachi"
+          ],
+          [
+            "Karachi",
+            "Asia/Karachi"
+          ],
+          [
+            "Tashkent",
+            "Asia/Tashkent"
+          ],
+          [
+            "Chennai",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kolkata",
+            "Asia/Kolkata"
+          ],
+          [
+            "Mumbai",
+            "Asia/Kolkata"
+          ],
+          [
+            "New Delhi",
+            "Asia/Kolkata"
+          ],
+          [
+            "Kathmandu",
+            "Asia/Kathmandu"
+          ],
+          [
+            "Astana",
+            "Asia/Dhaka"
+          ],
+          [
+            "Dhaka",
+            "Asia/Dhaka"
+          ],
+          [
+            "Sri Jayawardenepura",
+            "Asia/Colombo"
+          ],
+          [
+            "Almaty",
+            "Asia/Almaty"
+          ],
+          [
+            "Novosibirsk",
+            "Asia/Novosibirsk"
+          ],
+          [
+            "Rangoon",
+            "Asia/Rangoon"
+          ],
+          [
+            "Bangkok",
+            "Asia/Bangkok"
+          ],
+          [
+            "Hanoi",
+            "Asia/Bangkok"
+          ],
+          [
+            "Jakarta",
+            "Asia/Jakarta"
+          ],
+          [
+            "Krasnoyarsk",
+            "Asia/Krasnoyarsk"
+          ],
+          [
+            "Beijing",
+            "Asia/Shanghai"
+          ],
+          [
+            "Chongqing",
+            "Asia/Chongqing"
+          ],
+          [
+            "Hong Kong",
+            "Asia/Hong_Kong"
+          ],
+          [
+            "Urumqi",
+            "Asia/Urumqi"
+          ],
+          [
+            "Kuala Lumpur",
+            "Asia/Kuala_Lumpur"
+          ],
+          [
+            "Singapore",
+            "Asia/Singapore"
+          ],
+          [
+            "Taipei",
+            "Asia/Taipei"
+          ],
+          [
+            "Perth",
+            "Australia/Perth"
+          ],
+          [
+            "Irkutsk",
+            "Asia/Irkutsk"
+          ],
+          [
+            "Ulaanbaatar",
+            "Asia/Ulaanbaatar"
+          ],
+          [
+            "Seoul",
+            "Asia/Seoul"
+          ],
+          [
+            "Osaka",
+            "Asia/Tokyo"
+          ],
+          [
+            "Sapporo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Tokyo",
+            "Asia/Tokyo"
+          ],
+          [
+            "Yakutsk",
+            "Asia/Yakutsk"
+          ],
+          [
+            "Darwin",
+            "Australia/Darwin"
+          ],
+          [
+            "Adelaide",
+            "Australia/Adelaide"
+          ],
+          [
+            "Canberra",
+            "Australia/Melbourne"
+          ],
+          [
+            "Melbourne",
+            "Australia/Melbourne"
+          ],
+          [
+            "Sydney",
+            "Australia/Sydney"
+          ],
+          [
+            "Brisbane",
+            "Australia/Brisbane"
+          ],
+          [
+            "Hobart",
+            "Australia/Hobart"
+          ],
+          [
+            "Vladivostok",
+            "Asia/Vladivostok"
+          ],
+          [
+            "Guam",
+            "Pacific/Guam"
+          ],
+          [
+            "Port Moresby",
+            "Pacific/Port_Moresby"
+          ],
+          [
+            "Magadan",
+            "Asia/Magadan"
+          ],
+          [
+            "Srednekolymsk",
+            "Asia/Srednekolymsk"
+          ],
+          [
+            "Solomon Is.",
+            "Pacific/Guadalcanal"
+          ],
+          [
+            "New Caledonia",
+            "Pacific/Noumea"
+          ],
+          [
+            "Fiji",
+            "Pacific/Fiji"
+          ],
+          [
+            "Kamchatka",
+            "Asia/Kamchatka"
+          ],
+          [
+            "Marshall Is.",
+            "Pacific/Majuro"
+          ],
+          [
+            "Auckland",
+            "Pacific/Auckland"
+          ],
+          [
+            "Wellington",
+            "Pacific/Auckland"
+          ],
+          [
+            "Nuku'alofa",
+            "Pacific/Tongatapu"
+          ],
+          [
+            "Tokelau Is.",
+            "Pacific/Fakaofo"
+          ],
+          [
+            "Chatham Is.",
+            "Pacific/Chatham"
+          ],
+          [
+            "Samoa",
+            "Pacific/Apia"
+          ]
+        ],
+        "optional": true
+      }
+    ],
+    "block": [
+      {
+        "number": 1,
+        "provider": "new_connector_1_connector_568507_1640853883",
+        "name": "get_events_all_metrics",
+        "as": "6b3e9118",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+        },
+        "input": {
+          "from": "0"
+        },
+        "extended_output_schema": [
+          {
+            "type": "array",
+            "name": "metrics",
+            "label": "Metrics",
+            "optional": true,
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "Object",
+                "details": {
+                  "real_name": "object"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "object"
+              },
+              {
+                "control_type": "text",
+                "label": "ID",
+                "details": {
+                  "real_name": "id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "id"
+              },
+              {
+                "control_type": "text",
+                "label": "Statistic Id",
+                "details": {
+                  "real_name": "statistic_id"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "statistic_id"
+              },
+              {
+                "control_type": "number",
+                "label": "Timestamp",
+                "parse_output": "float_conversion",
+                "details": {
+                  "real_name": "timestamp"
+                },
+                "optional": true,
+                "type": "number",
+                "name": "timestamp"
+              },
+              {
+                "control_type": "text",
+                "label": "Event name",
+                "details": {
+                  "real_name": "event_name"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "event_name"
+              },
+              {
+                "control_type": "text",
+                "label": "Datetime",
+                "render_input": "date_time_conversion",
+                "parse_output": "date_time_conversion",
+                "details": {
+                  "real_name": "datetime"
+                },
+                "optional": true,
+                "type": "date_time",
+                "name": "datetime"
+              },
+              {
+                "control_type": "text",
+                "label": "UUID",
+                "details": {
+                  "real_name": "uuid"
+                },
+                "optional": true,
+                "type": "string",
+                "name": "uuid"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Subject",
+                    "details": {
+                      "real_name": "Subject"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Subject"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Campaign Name",
+                    "details": {
+                      "real_name": "Campaign Name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Campaign Name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Message",
+                    "details": {
+                      "real_name": "$message"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$message"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email Domain",
+                    "details": {
+                      "real_name": "Email Domain"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Email Domain"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Message send cohort",
+                    "details": {
+                      "real_name": "$_cohort$message_send_cohort"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$_cohort$message_send_cohort"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Client type",
+                    "details": {
+                      "real_name": "Client Type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Client Type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Client OS Family",
+                    "details": {
+                      "real_name": "Client OS Family"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Client OS Family"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": " Client OS",
+                    "details": {
+                      "real_name": " Client OS"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": " Client OS"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Client Name",
+                    "details": {
+                      "real_name": "Client Name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Client Name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Message Interaction",
+                    "details": {
+                      "real_name": "$message_interaction"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$message_interaction"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ESP",
+                    "details": {
+                      "real_name": "$ESP"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$ESP"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Machine Open",
+                    "details": {
+                      "real_name": "machine_open"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "machine_open"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Event Id",
+                    "details": {
+                      "real_name": "$event_id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$event_id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Bounce Type",
+                    "details": {
+                      "real_name": "Bounce Type"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Bounce Type"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "URL",
+                    "details": {
+                      "real_name": "URL"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "URL"
+                  }
+                ],
+                "label": "Event properties",
+                "details": {
+                  "real_name": "event_properties"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "event_properties"
+              },
+              {
+                "properties": [
+                  {
+                    "control_type": "text",
+                    "label": "Object",
+                    "details": {
+                      "real_name": "object"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "Subject"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "ID",
+                    "details": {
+                      "real_name": "id"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "id"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Email",
+                    "details": {
+                      "real_name": "$email"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$email"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Address1",
+                    "details": {
+                      "real_name": "$address1"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$address1"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Address2",
+                    "details": {
+                      "real_name": "$address2"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$address2"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "City",
+                    "details": {
+                      "real_name": "$city"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$city"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Country",
+                    "details": {
+                      "real_name": "$country"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$country"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Latitude",
+                    "details": {
+                      "real_name": "$latitude"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$latitude"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Longitude",
+                    "details": {
+                      "real_name": "$longitude"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$longitude"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Region",
+                    "details": {
+                      "real_name": "$region"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$region"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Zip",
+                    "details": {
+                      "real_name": "$zip"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$zip"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Title",
+                    "details": {
+                      "real_name": "$title"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$title"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "First Name",
+                    "details": {
+                      "real_name": "$first_name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$first_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Last Name",
+                    "details": {
+                      "real_name": "$last_name"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$last_name"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Organization",
+                    "details": {
+                      "real_name": "$organization"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$organization"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Phone Number",
+                    "details": {
+                      "real_name": "$phone_number"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$phone_number"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "timezone",
+                    "details": {
+                      "real_name": "$timezone"
+                    },
+                    "optional": true,
+                    "type": "string",
+                    "name": "$timezone"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Created",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "created"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "created"
+                  },
+                  {
+                    "control_type": "text",
+                    "label": "Updated",
+                    "render_input": "date_time_conversion",
+                    "parse_output": "date_time_conversion",
+                    "details": {
+                      "real_name": "updated"
+                    },
+                    "optional": true,
+                    "type": "date_time",
+                    "name": "updated"
+                  }
+                ],
+                "label": "Person",
+                "details": {
+                  "real_name": "person"
+                },
+                "optional": true,
+                "type": "object",
+                "name": "person"
+              }
+            ]
+          }
+        ],
+        "visible_config_fields": [
+          "from",
+          "since"
+        ],
+        "comment": "This step fetches all the events. You can specify \"from\" and \"since\"  as parameter and it fetches the events accordingly.",
+        "uuid": "76af1794-0185-47e1-bffa-1fd6ecda48c4",
+        "skip": false
+      },
+      {
+        "number": 2,
+        "provider": "csv_parser",
+        "name": "create_csv_lines",
+        "as": "dc7bab9e",
+        "title": null,
+        "description": null,
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "create_header_line": true,
+          "force_quotes": true
+        },
+        "input": {
+          "create_header_line": "true",
+          "column_separator": ",",
+          "force_quotes": "false",
+          "column_labels": "EventTimeStamp,Type,SourceCustomerNumber,Email,SourceMessageNumber,Subtype,URL",
+          "lines": {
+            "____source": "#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics')}",
+            "column_0": "#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.timestamp')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.event_name')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.person.id')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.person.$email')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.event_properties.$message')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.event_properties.Bounce Type')},#{_('data.new_connector_1_connector_568507_1640853883.6b3e9118.metrics.first.event_properties.URL')}"
+          }
+        },
+        "extended_input_schema": [
+          {
+            "type": "array",
+            "name": "lines",
+            "label": "CSV data lines",
+            "hint": "Provide field mappings for the CSV data below.",
+            "of": "object",
+            "properties": [
+              {
+                "control_type": "text",
+                "label": "EventTimeStamp,Type,SourceCustomerNumber,Email,SourceMessageNumber,Subtype,URL",
+                "optional": true,
+                "sticky": true,
+                "type": "string",
+                "name": "column_0"
+              }
+            ]
+          }
+        ],
+        "comment": "This step will compose the csv from the events fetched in step 2.",
+        "uuid": "ed6508c1-ec88-4387-af88-1f6de0ec5ef7"
+      },
+      {
+        "number": 3,
+        "provider": "sftp_secondary",
+        "name": "upload",
+        "as": "1d637a86",
+        "keyword": "action",
+        "dynamicPickListSelection": {
+        },
+        "toggleCfg": {
+          "append": true
+        },
+        "input": {
+          "filename": "=\"/435/Events_Klaviyo_\"+now.strftime(\"%Y%m%d%H%M%S%L\")+\".csv\"",
+          "content": "#{_('data.csv_parser.dc7bab9e.csv_lines')}",
+          "append": "true"
+        },
+        "comment": "This step will upload the CSV file to SFTP server.",
+        "uuid": "fb5f5709-bebd-45f4-a5a6-0150b0c77519"
+      }
+    ],
+    "uuid": "a7e9c2fe-28c3-4d74-b90a-92d5f9009495"
+  },
+  "config": [
+    {
+      "keyword": "application",
+      "provider": "clock",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "new_connector_1_connector_568507_1640853883",
+      "account_id": {
+        "zip_name": "Recipes/hs_ergin_account.connection.json",
+        "name": "hs-ergin-account",
+        "folder": "Recipes",
+        "custom": true
+      },
+      "skip_validation": false
+    },
+    {
+      "keyword": "application",
+      "provider": "csv_parser",
+      "skip_validation": false,
+      "account_id": null
+    },
+    {
+      "keyword": "application",
+      "provider": "sftp_secondary",
+      "account_id": {
+        "zip_name": "Recipes/hs_sftp.connection.json",
+        "name": "hs-sftp",
+        "folder": "Recipes"
+      },
+      "skip_validation": false
+    }
+  ]
+}
