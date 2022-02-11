@@ -1,0 +1,10 @@
+{
+  "name": "hs-wip-ergin-account",
+  "provider": {
+    "zip_name": "klaviyo_connector_hs_wip.custom_adapter.json",
+    "name": "Klaviyo connector - HS - WIP",
+    "folder": ""
+  },
+  "secure_gateway_tunnel_name": null,
+  "root_folder": false
+}
